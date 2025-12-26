@@ -1,7 +1,7 @@
-##Enterprise Grade SOC & Detection Engineering Lab
+# Enterprise Grade SOC & Detection Engineering Lab
 
-
-1. Project Overview
+---
+## 1. Project Overview
 
 Modern cybersecurity failures rarely happen because security tools are missing. They occur when tools operate in silos, telemetry is not correlated, alerts lack context, and response workflows are fragmented ⚠️. A real Security Operations Center (SOC) is not defined by dashboards alone, but by how effectively security data is collected, analyzed, and acted upon 🛡️.
 
@@ -59,8 +59,8 @@ automation to reduce response time and analyst fatigue 🤖
 
 This approach ensures that the SOC is not theoretical, but operationally realistic and defensible.
 
-
-2. SOC Architecture & Design Philosophy
+---
+## 2. SOC Architecture & Design Philosophy
 Architecture Mindset
 
 This SOC is designed with a visibility-first mindset 🔍.
@@ -93,8 +93,8 @@ Telemetry → Detection → Alert → Ticket → Investigation → Resolution
 Alerts are treated as investigation starting points, with full documentation and auditability 📑.
 
 
-
-3. High-Level Architecture
+---
+## 3. High-Level Architecture
 Overall Architecture Overview
 
 The SOC environment is built as a private, cloud-based security infrastructure where all components communicate internally over a controlled network 🧱.
@@ -145,8 +145,8 @@ Any interaction with internal systems is intentional and monitored, allowing det
 
 
 
-
-4. Secure Private Access & Zero Trust Foundation
+---
+## 4. Secure Private Access & Zero Trust Foundation
 
 This section documents the initial foundation setup of the SOC environment.
 All later components (Elastic, endpoints, OS Ticket, detections) rely on this layer for secure private access.
@@ -274,8 +274,8 @@ Only SOC VPC traffic was routed through WARP.
 
 
 
-
-5. Core SIEM Deployment – Elastic Stack (Elasticsearch & Kibana)
+---
+## 5. Core SIEM Deployment – Elastic Stack (Elasticsearch & Kibana)
 
 This section documents the deployment and configuration of the Elastic Stack inside the SOC private network.
 Elasticsearch acts as the central data store, while Kibana provides visibility, analysis, and detection management.
@@ -436,8 +436,8 @@ After restart, errors were resolved.
 
 
 
-
-6. Endpoint Infrastructure Setup (Windows & Linux Targets)
+---
+## 6. Endpoint Infrastructure Setup (Windows & Linux Targets)
 
 This section documents the deployment of endpoint systems that later act as attack targets and telemetry sources within the SOC.
 At this stage, no detections or agents are installed — the focus is strictly on infrastructure preparation.
@@ -527,8 +527,8 @@ This confirmed that the Linux server was already receiving real attacker traffic
 
 
 
-
-7. Fleet Server Setup & Elastic Agent Enrollment
+---
+## 7. Fleet Server Setup & Elastic Agent Enrollment
 
 This section documents the deployment of the Fleet Server and the onboarding of the Windows endpoint into the Elastic Stack.
 Fleet Server enables centralized agent management, policy enforcement, and telemetry control across all endpoints 🧠.
@@ -662,8 +662,8 @@ centralized management is active 📊
 
 
 
-
-8. Windows Endpoint Telemetry Engineering (Sysmon & Defender Logs)
+---
+## 8. Windows Endpoint Telemetry Engineering (Sysmon & Defender Logs)
 
 This section documents how high-fidelity Windows telemetry was enabled on the Windows Server endpoint.
 The focus here is on process, network, and security visibility, which is essential for detection engineering 🧠.
@@ -808,8 +808,8 @@ Windows endpoint visibility is fully operational 🛡️
 
 
 
-
-9. Linux SSH Telemetry Engineering (Elastic Agent & Authentication Logs)
+---
+## 9. Linux SSH Telemetry Engineering (Elastic Agent & Authentication Logs)
 
 This section documents how the Linux SSH server was integrated into the SOC for authentication telemetry, enabling visibility into real-world SSH brute-force activity 🐧🔐.
 
@@ -941,8 +941,8 @@ availability of real SSH attack telemetry 🛡️
 
 
 
-
-10. SSH Brute-Force Detection & Visualization Dashboards
+---
+## 10. SSH Brute-Force Detection & Visualization Dashboards
 
 This section documents how SSH authentication telemetry collected from the Linux server was transformed into detections, alerts, and visual dashboards inside the SOC 🛡️.
 
@@ -1077,8 +1077,8 @@ successful authentication events 🔍
 
 
 
-
-11. Windows RDP Authentication Detection & Brute-Force Alerting
+---
+## 11. Windows RDP Authentication Detection & Brute-Force Alerting
 
 This section documents how Windows authentication telemetry was analyzed and converted into RDP brute-force detections using Windows Security Event Logs. The goal here was to achieve parity with SSH monitoring by applying the same detection rigor to Windows-based access 🔐🪟.
 
@@ -1209,8 +1209,8 @@ SOC visibility for RDP attacks 🛡️
 
 
 
-
-12. RDP Authentication Dashboards & Visualization (Windows Server)
+---
+## 12. RDP Authentication Dashboards & Visualization (Windows Server)
 
 This section documents how Windows RDP authentication activity was visualized using maps and tables, allowing quick identification of attack origins, login patterns, and successful access 🗺️🪟.
 
@@ -1316,8 +1316,8 @@ This dashboard acts as the central authentication intelligence view of the SOC.
 
 
 
-
-13. Attack Vector Design & Adversary Simulation Planning
+---
+## 13. Attack Vector Design & Adversary Simulation Planning
 
 This section documents the pre-attack planning phase, where the complete intrusion path against the Windows Server was designed before executing any attack.
 The objective was to ensure that every attacker action would generate observable telemetry and map cleanly to existing detections 🧠⚔️.
@@ -1397,8 +1397,8 @@ This ensured that when the attack was executed, all detections would be evaluate
 
 
 
-
-14. Command & Control Infrastructure Deployment (Mythic C2)
+---
+## 14. Command & Control Infrastructure Deployment (Mythic C2)
 
 This section documents the deployment of the Mythic Command-and-Control (C2) server, which is used later to simulate real adversary post-compromise behavior against the Windows Server ⚔️🧠.
 
@@ -1546,8 +1546,8 @@ This confirmed the Mythic C2 infrastructure was fully operational and ready for 
 
 
 
-
-15. Full Attack Execution – RDP Brute Force, Payload Execution & C2 Callback
+---
+## 15. Full Attack Execution – RDP Brute Force, Payload Execution & C2 Callback
 
 This section documents the complete adversary kill-chain execution against the Windows Server — from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.
 All actions performed here were intentionally designed to generate telemetry for validation in later detection stages.
@@ -1660,8 +1660,8 @@ This confirmed full post-compromise control of the endpoint 🎯.
 
 
 
-
-16. Detecting Mythic C2 Activity & Suspicious Behavior
+---
+## 16. Detecting Mythic C2 Activity & Suspicious Behavior
 
 This section documents how post-compromise activity generated in Section 15 was detected using Sysmon telemetry, custom detection rules, and dashboards.
 The goal here was to validate that real C2 activity leaves observable and actionable security signals 🧠🚨.
@@ -1783,8 +1783,8 @@ This dashboard provides centralized visibility into post-compromise behavior and
 
 
 
-
-17. Ticketing System Deployment – OS Ticket Setup
+---
+## 17. Ticketing System Deployment – OS Ticket Setup
 
 This section documents the deployment and configuration of OS Ticket, which acts as the case management and incident tracking system for the SOC.
 This system is later integrated with Elastic to automate alert-to-ticket workflows 🧾⚙️.
@@ -1876,8 +1876,8 @@ ticketing platform is ready for integration 🧠🧾
 
 
 
-
-18. Alert-to-Ticket Automation (Elastic → OS Ticket Integration)
+---
+## 18. Alert-to-Ticket Automation (Elastic → OS Ticket Integration)
 
 This section documents how Elastic detections were integrated with OS Ticket to automatically convert security alerts into tickets, enabling structured investigation and case tracking 🧾🔁.
 
@@ -1979,8 +1979,8 @@ investigation reference
 
 
 
-
-19. SOC Analyst Investigation Workflow (Alert → Ticket → Resolution)
+---
+## 19. SOC Analyst Investigation Workflow (Alert → Ticket → Resolution)
 
 This section documents how alerts generated by Elastic are handled by a SOC analyst, investigated using telemetry and dashboards, and finally resolved using OS Ticket 🧠🛡️.
 The focus here is on operational response, not detection creation.
@@ -2131,8 +2131,8 @@ Detect → Alert → Ticket → Investigate → Document → Close
 
 
 
-
-20. Final SOC Capabilities & End-to-End Validation
+---
+## 20. Final SOC Capabilities & End-to-End Validation
 
 This section documents the final operational state of the SOC after all infrastructure, detections, attack simulations, and response workflows were implemented and validated 🧠🛡️.
 At this stage, the SOC is not a setup — it is a functioning security operations environment.
@@ -2256,8 +2256,8 @@ The SOC operated as a cohesive system, not a collection of tools.
 
 
 
-
-21. Future Enhancements
+---
+## 21. Future Enhancements
 
 This section outlines potential extensions to further strengthen detection depth and SOC maturity 🧠🚀.
 
