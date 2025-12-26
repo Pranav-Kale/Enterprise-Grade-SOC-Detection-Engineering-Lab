@@ -1997,7 +1997,7 @@ Selected the SSH brute-force alert
 
 Reviewed alert metadata
 
-<img src="/screenshots/Alert in stack management.png" width="720" height="420">
+<img src="/screenshots/open alerts under security.png" width="750" height="420"> <img src="/screenshots/investigation - 1.png" width="750" height="420">
 
 This view provides:
 
@@ -2021,7 +2021,7 @@ Logged into OS Ticket
 
 Opened the newly created ticket
 
-<img src="/screenshots/We will see alerts here.png" width="720" height="420">
+<img src="/screenshots/ticket generated.png" width="750" height="420"> <img src="/screenshots/ticket info.png" width="750" height="420">
 
 The ticket contained:
 
@@ -2037,7 +2037,7 @@ SOC reference information 🧾
 
 The ticket was assigned to an analyst for investigation.
 
-<img src="/screenshots/assign ticket to analyst.png" width="720" height="420">
+<img src="/screenshots/assign ticket.png" width="750" height="420">
 
 This ensures:
 
@@ -2053,13 +2053,13 @@ The analyst pivoted back to Kibana to investigate the alert.
 
 Steps performed:
 
-Opened the alert details
+Opened alert details
 
-Clicked View surrounding events
+Reviewed surrounding authentication events
 
-Checked related authentication logs
+Checked if any login was successful
 
-<img src="/screenshots/investigating alert in kibana.png" width="720" height="420">
+<img src="/screenshots/investigation - 2.png" width="750" height="420"> <img src="/screenshots/investigation - 3.png" width="750" height="420">
 19.5 Validating Attacker Source and Behavior
 
 Source IP addresses were analyzed for threat context.
@@ -2072,7 +2072,7 @@ geographic origin
 
 authentication success or failure
 
-<img src="/screenshots/checking source ip and geo.png" width="720" height="420">
+<img src="/screenshots/investigation - 2.png" width="750" height="420">
 
 This helps differentiate between:
 
@@ -2094,7 +2094,7 @@ RDP authentication dashboard
 
 suspicious activity dashboard
 
-<img src="/screenshots/checking dashboards.png" width="720" height="420">
+<img src="/screenshots/checking dashboards.png" width="750" height="420">
 
 This confirmed whether:
 
@@ -2116,12 +2116,12 @@ Noted IP addresses and usernames
 
 Recorded conclusion
 
-<img src="/screenshots/adding notes in ticket.png" width="720" height="420">
+<img src="/screenshots/post reply to ticket.png" width="750" height="420">
 19.8 Closing the Ticket
 
 After confirming no further malicious activity, the ticket was closed.
 
-<img src="/screenshots/closing ticket.png" width="720" height="420">
+<img src="/screenshots/ticket status.png" width="750" height="420"> <img src="/screenshots/closed tickets.png" width="750" height="420">
 
 This completes the SOC workflow:
 
