@@ -2324,3 +2324,10 @@ This section outlines potential extensions to further strengthen detection depth
 - Detect periodic outbound traffic patterns
 - Identify suspicious DNS behavior and beaconing 🌐
 - Enhance C2 detection beyond payload execution
+
+
+---  
+
+## 📌 Let’s Connect  
+💼 [LinkedIn](https://www.linkedin.com/in/pranavkale1124/)  
+🖥️ [GitHub](https://github.com/Pranav-Kale) 
