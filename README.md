@@ -2094,7 +2094,6 @@ RDP authentication dashboard
 
 suspicious activity dashboard
 
-<img src="/screenshots/checking dashboards.png" width="750" height="420">
 
 This confirmed whether:
 
