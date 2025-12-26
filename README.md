@@ -151,7 +151,8 @@ Any interaction with internal systems is intentional and monitored, allowing det
 This section documents the initial foundation setup of the SOC environment.
 All later components (Elastic, endpoints, OS Ticket, detections) rely on this layer for secure private access.
 
-4.1 Creating the Vultr VPC Network
+
+### 4.1 Creating the Vultr VPC Network
 
 A dedicated private network was created to host all SOC infrastructure.
 
@@ -169,7 +170,8 @@ Assigned private CIDR block
 
 This VPC serves as the isolated internal SOC network.
 
-4.2 Deploying the VPC Gateway VM
+
+### 4.2 Deploying the VPC Gateway VM
 
 A gateway VM was deployed inside the VPC to act as:
 
@@ -186,11 +188,13 @@ Attached it to the SOC VPC
 Verified instance creation
 
 <img src="/screenshots/Compute and deploy button.png" width="700" height="420"> <img src="/screenshots/VPC gateway conf.png" width="700" height="420"> <img src="/screenshots/VPC Gateway Created and Running.png" width="700" height="420"> <img src="/screenshots/VPC Gateway.png" width="700" height="420">
-4.3 Verifying Gateway Connectivity
+
+
+### 4.3 Verifying Gateway Connectivity
 
 Before introducing Cloudflare, direct SSH access was validated.
 
-<img src="/screenshots/SSH VPC Gateway.png" width="700" height="420">
+<img src="/screenshots/ssh to 10.0.0.3 success.png" width="700" height="420">
 
 This confirmed:
 
@@ -198,7 +202,8 @@ instance availability
 
 VPC networking functionality
 
-4.4 Cloudflare Account & Zero Trust Setup
+
+### 4.4 Cloudflare Account & Zero Trust Setup
 
 Cloudflare Zero Trust was configured to enable identity-based private access.
 
@@ -211,7 +216,8 @@ Accessed Zero Trust dashboard
 Defined team name
 
 <img src="/screenshots/Cloudflare signup.png" width="700" height="420"> <img src="/screenshots/Cloudflare Dashboard.png" width="700" height="420"> <img src="/screenshots/Team Name.png" width="700" height="420"> <img src="/screenshots/Zero Trust Dashboard.png" width="700" height="420">
-4.5 Installing Cloudflare WARP on Analyst Device
+
+### 4.5 Installing Cloudflare WARP on Analyst Device
 
 WARP was installed to provide Zero Trust connectivity from the analyst workstation.
 
@@ -224,7 +230,8 @@ Downloaded WARP client
 Installed and connected WARP
 
 <img src="/screenshots/Add a device.png" width="700" height="420"> <img src="/screenshots/Download WARp.png" width="700" height="420"> <img src="/screenshots/WARP Download.png" width="700" height="420"> <img src="/screenshots/Cloudflare Warp installation.png" width="700" height="420"> <img src="/screenshots/WARP Connected.png" width="700" height="420">
-4.6 Installing Cloudflare Tunnel on the Gateway
+
+### 4.6 Installing Cloudflare Tunnel on the Gateway
 
 The gateway VM was configured as a Cloudflare Tunnel endpoint.
 
@@ -237,12 +244,14 @@ Selected Debian install method
 Installed and started cloudflared
 
 <img src="/screenshots/Create a Connector.png" width="700" height="420"> <img src="/screenshots/Select Cloudflare connector.png" width="700" height="420"> <img src="/screenshots/name the tunnel.png" width="700" height="420"> <img src="/screenshots/Choose Debian.png" width="700" height="420"> <img src="/screenshots/Install cloudflared.png" width="700" height="420"> <img src="/screenshots/Cloudflared Installed and configured.png" width="700" height="420">
-4.7 Adding Private Routes to the Tunnel
+
+### 4.7 Adding Private Routes to the Tunnel
 
 Private routing was configured so WARP clients could reach the SOC VPC.
 
 <img src="/screenshots/Create Routes.png" width="700" height="420"> <img src="/screenshots/Route Conf.png" width="700" height="420">
-4.8 Validating Private Connectivity
+
+### 4.8 Validating Private Connectivity
 
 Connectivity tests were performed through the tunnel.
 
@@ -256,17 +265,20 @@ tunnel functionality
 
 internal VPC communication
 
-4.9 Enabling IP Forwarding & NAT on Gateway
+
+### 4.9 Enabling IP Forwarding & NAT on Gateway
 
 To allow traffic flow between WARP clients and internal hosts, NAT was configured.
 
 <img src="/screenshots/Run these MASquerade commands.png" width="700" height="420">
-4.10 WARP Enrollment Policies
+
+### 4.10 WARP Enrollment Policies
 
 Device enrollment policies were configured to restrict access.
 
 <img src="/screenshots/WARP Preferences.png" width="700" height="420"> <img src="/screenshots/WARP Zero trust login button.png" width="700" height="420"> <img src="/screenshots/WARP Login page.png" width="700" height="420"> <img src="/screenshots/WARP zero trust success.png" width="700" height="420"> <img src="/screenshots/Device Enrollement manage button.png" width="700" height="420"> <img src="/screenshots/Edit default policy.png" width="700" height="420"> <img src="/screenshots/Enrollment policy added.png" width="700" height="420">
-4.11 Split Tunnel Configuration
+
+### 4.11 Split Tunnel Configuration
 
 Only SOC VPC traffic was routed through WARP.
 
@@ -280,12 +292,14 @@ Only SOC VPC traffic was routed through WARP.
 This section documents the deployment and configuration of the Elastic Stack inside the SOC private network.
 Elasticsearch acts as the central data store, while Kibana provides visibility, analysis, and detection management.
 
-5.1 Deploying the Elasticsearch Server
+
+### 5.1 Deploying the Elasticsearch Server
 
 A dedicated VM was deployed inside the SOC VPC to host Elasticsearch.
 
 <img src="/screenshots/ELK Server created.png" width="700" height="420">
-5.2 Verifying Private Connectivity to Elasticsearch Server
+
+### 5.2 Verifying Private Connectivity to Elasticsearch Server
 
 SSH access was tested using the private VPC IP.
 
@@ -299,7 +313,8 @@ VPC gateway forwarding
 
 no public exposure
 
-5.3 Updating the Elasticsearch Server
+
+### 5.3 Updating the Elasticsearch Server
 
 System packages were updated to ensure stability and compatibility.
 
@@ -310,17 +325,20 @@ apt-get update
 apt-get upgrade -y
 
 <img src="/screenshots/initial command on elk server.png" width="700" height="420">
-5.4 Downloading Elasticsearch Installer
+
+### 5.4 Downloading Elasticsearch Installer
 
 The official Elasticsearch .deb installer link was copied from the Elastic website.
 
 <img src="/screenshots/Elasticsearch copy link address.png" width="700" height="420">
-5.5 Installing Elasticsearch
+
+### 5.5 Installing Elasticsearch
 
 Elasticsearch was downloaded and installed using wget and dpkg.
 
 <img src="/screenshots/wget command for elastic search.png" width="700" height="420"> <img src="/screenshots/install elastic search.png" width="700" height="420">
-5.6 Saving Elasticsearch Security Credentials
+
+### 5.6 Saving Elasticsearch Security Credentials
 
 During installation, Elasticsearch generated:
 
@@ -331,7 +349,8 @@ enrollment information
 These credentials were saved for later use.
 
 <img src="/screenshots/install elastic search and save in notepad.png" width="700" height="420">
-5.7 Configuring Elasticsearch Network Settings
+
+### 5.7 Configuring Elasticsearch Network Settings
 
 The Elasticsearch configuration file was modified to bind only to the private VPC IP.
 
@@ -343,7 +362,8 @@ network.host: 10.0.0.4
 
 http.port: 9200
 
-5.8 Starting and Verifying Elasticsearch Service
+
+### 5.8 Starting and Verifying Elasticsearch Service
 
 Elasticsearch was enabled and started as a system service.
 
@@ -355,17 +375,20 @@ service running
 
 no startup errors
 
-5.9 Downloading Kibana
+
+### 5.9 Downloading Kibana
 
 The Kibana .deb installer was downloaded from Elastic’s official site.
 
 <img src="/screenshots/Copy kibana link.png" width="700" height="420">
-5.10 Installing Kibana
+
+### 5.10 Installing Kibana
 
 Kibana was installed using the downloaded package.
 
 <img src="/screenshots/Install kibana.png" width="700" height="420">
-5.11 Configuring Kibana Network Settings
+
+### 5.11 Configuring Kibana Network Settings
 
 Kibana configuration file was edited to define host and port.
 
@@ -377,22 +400,26 @@ server.port: 5601
 
 server.host: 10.0.0.4
 
-5.12 Starting Kibana Service
+
+### 5.12 Starting Kibana Service
 
 Kibana was enabled and started.
 
 <img src="/screenshots/Kibana up and running.png" width="700" height="420">
-5.13 Generating Kibana Enrollment Token
+
+### 5.13 Generating Kibana Enrollment Token
 
 An enrollment token was generated from the Elasticsearch server.
 
 <img src="/screenshots/Enrollment token generated and now copy and save the token in notepad.png" width="700" height="420">
-5.14 Firewall Configuration for Kibana Access
+
+### 5.14 Firewall Configuration for Kibana Access
 
 Firewall rules were updated to allow HTTP/HTTPS traffic.
 
 <img src="/screenshots/ufw changes.png" width="700" height="420">
-5.15 Verifying WARP Connectivity
+
+### 5.15 Verifying WARP Connectivity
 
 WARP-assigned IP on analyst workstation was verified.
 
@@ -401,12 +428,14 @@ WARP-assigned IP on analyst workstation was verified.
 Additional routing commands were executed on the VPC gateway.
 
 <img src="/screenshots/run these command on vpc gateway.png" width="700" height="420">
-5.16 Fixing Kibana Accessibility
+
+### 5.16 Fixing Kibana Accessibility
 
 Kibana was updated to listen on all interfaces.
 
 <img src="/screenshots/Kibana server host changes.png" width="700" height="420">
-5.17 Configuring Kibana via Browser
+
+### 5.17 Configuring Kibana via Browser
 
 Enrollment token was entered to complete Kibana setup.
 
@@ -415,12 +444,14 @@ Enrollment token was entered to complete Kibana setup.
 Verification code was generated and entered.
 
 <img src="/screenshots/Kibana Verification Required.png" width="700" height="420"> <img src="/screenshots/get verififcation code for kibana.png" width="700" height="420">
-5.18 Logging into Kibana
+
+### 5.18 Logging into Kibana
 
 Elastic superuser credentials were used to log in.
 
 <img src="/screenshots/credentials to login to the kibana from saved in notepad.png" width="700" height="420">
-5.19 Resolving Kibana Alert Encryption Errors
+
+### 5.19 Resolving Kibana Alert Encryption Errors
 
 Initial alert errors were observed.
 
@@ -442,7 +473,8 @@ After restart, errors were resolved.
 This section documents the deployment of endpoint systems that later act as attack targets and telemetry sources within the SOC.
 At this stage, no detections or agents are installed — the focus is strictly on infrastructure preparation.
 
-6.1 Windows Server Deployment (Target Endpoint)
+
+### 6.1 Windows Server Deployment (Target Endpoint)
 
 A Windows Server 2022 virtual machine was deployed inside the Vultr environment to serve as the primary attack target for RDP-based intrusion and post-exploitation simulations 🪟.
 
@@ -470,7 +502,8 @@ No firewall rules were modified
 
 The server was intentionally left in a baseline state for later attack validation 🎯.
 
-6.2 Linux SSH Server Deployment (Authentication Target)
+
+### 6.2 Linux SSH Server Deployment (Authentication Target)
 
 A Linux server was deployed to act as an SSH authentication target, allowing observation of real-world brute-force behavior commonly seen on internet-exposed SSH services 🐧.
 
@@ -483,7 +516,8 @@ Purpose: SSH authentication telemetry
 Role: Linux attack surface
 
 <img src="/screenshots/Linux ssh server added.png" height="370">
-6.3 Accessing the Linux Server and Locating Logs
+
+### 6.3 Accessing the Linux Server and Locating Logs
 
 After deployment, an SSH connection was established to the Linux server.
 
@@ -505,7 +539,8 @@ Failed authentication events
 
 Brute-force activity 🔐
 
-6.4 Observing Real SSH Brute-Force Activity
+
+### 6.4 Observing Real SSH Brute-Force Activity
 
 After leaving the server exposed for some time, failed login attempts began appearing automatically — a common behavior for publicly reachable SSH services 🌍.
 
@@ -533,7 +568,8 @@ This confirmed that the Linux server was already receiving real attacker traffic
 This section documents the deployment of the Fleet Server and the onboarding of the Windows endpoint into the Elastic Stack.
 Fleet Server enables centralized agent management, policy enforcement, and telemetry control across all endpoints 🧠.
 
-7.1 Accessing Fleet in Kibana
+
+### 7.1 Accessing Fleet in Kibana
 
 Fleet management was accessed from the Kibana dashboard.
 
@@ -546,12 +582,14 @@ Clicked the hamburger menu
 Navigated to Management → Fleet
 
 <img src="/screenshots/Fleet in Management on Kibana.png" width="700" height="420">
-7.2 Adding a Fleet Server
+
+### 7.2 Adding a Fleet Server
 
 A Fleet Server was added to centrally manage Elastic Agents.
 
 <img src="/screenshots/Add fleet server.png" width="700" height="420">
-7.3 Fleet Server Quick Start Configuration
+
+### 7.3 Fleet Server Quick Start Configuration
 
 The Quick Start option was selected for Fleet Server setup.
 
@@ -563,17 +601,20 @@ Fleet Server URL:
 https://<FLEET_SERVER_PUBLIC_IP>:8220
 
 <img src="/screenshots/kibana fleet sdd conf 1.png" width="700" height="420">
-7.4 Preparing the Fleet Server VM
+
+### 7.4 Preparing the Fleet Server VM
 
 Connected to the Fleet Server VM and updated the system packages.
 
 <img src="/screenshots/Update fleet server repository.png" width="700" height="420">
-7.5 Copying Fleet Server Installation Command
+
+### 7.5 Copying Fleet Server Installation Command
 
 The installation command generated by Kibana was copied.
 
 <img src="/screenshots/Select fleet host and copy command.png" width="700" height="420">
-7.6 Installing Fleet Server
+
+### 7.6 Installing Fleet Server
 
 The copied command was executed on the Fleet Server VM.
 
@@ -582,39 +623,46 @@ The copied command was executed on the Fleet Server VM.
 The installation initially failed due to connectivity issues.
 
 <img src="/screenshots/We get bunch of error.png" width="700" height="420">
-7.7 Allowing Required Port on Elasticsearch Server
+
+### 7.7 Allowing Required Port on Elasticsearch Server
 
 To resolve the issue, port 9200 was allowed on the Elasticsearch server firewall.
 
 <img src="/screenshots/Add a rule in elk server.png" width="700" height="420">
-7.8 Retrying Fleet Server Installation
+
+### 7.8 Retrying Fleet Server Installation
 
 The Fleet Server installation command was re-executed.
 
 <img src="/screenshots/Run this command agan.png" width="700" height="420">
-7.9 Fleet Server Enrollment Successful
+
+### 7.9 Fleet Server Enrollment Successful
 
 Fleet Server successfully enrolled into Elasticsearch.
 
 <img src="/screenshots/Elastic agent successfully enrolled.png" width="700" height="420">
-7.10 Verifying Fleet Server in Kibana
+
+### 7.10 Verifying Fleet Server in Kibana
 
 Fleet Server health status was verified in Kibana.
 
 <img src="/screenshots/continue enrolling fleet server.png" width="700" height="420">
-7.11 Creating a Windows Agent Policy
+
+### 7.11 Creating a Windows Agent Policy
 
 A dedicated agent policy was created for the Windows Server.
 
 Policy name: windows-policy
 
 <img src="/screenshots/policy name.png" width="700" height="420">
-7.12 Copying Windows Elastic Agent Installer Command
+
+### 7.12 Copying Windows Elastic Agent Installer Command
 
 The Elastic Agent installation command for Windows was copied.
 
 <img src="/screenshots/copy commands for fleet server.png" width="700" height="420">
-7.13 Installing Elastic Agent on Windows Server
+
+### 7.13 Installing Elastic Agent on Windows Server
 
 On the Windows Server:
 
@@ -623,7 +671,8 @@ Opened PowerShell as Administrator
 Pasted the copied install command
 
 <img src="/screenshots/Paste the coppied command.png" width="700" height="420">
-7.14 Fixing Certificate Validation Issue
+
+### 7.14 Fixing Certificate Validation Issue
 
 Enrollment failed due to certificate validation.
 
@@ -636,17 +685,20 @@ Final command format:
 .\elastic-agent.exe install --url=https://<FLEET_SERVER_IP>:8220 \
 --enrollment-token=<TOKEN> --insecure
 
-7.15 Elastic Agent Enrollment Successful
+
+### 7.15 Elastic Agent Enrollment Successful
 
 The Windows Elastic Agent enrolled successfully.
 
 <img src="/screenshots/Elastic agent successful.png" width="700" height="420">
-7.16 Verifying Agent Health in Fleet
+
+### 7.16 Verifying Agent Health in Fleet
 
 Both Fleet Server and Windows Agent showed Healthy status.
 
 <img src="/screenshots/Fleet server added.png" width="700" height="420">
-7.17 Validating Windows Logs in Kibana
+
+### 7.17 Validating Windows Logs in Kibana
 
 Windows telemetry was verified in Discover.
 
@@ -668,12 +720,14 @@ centralized management is active 📊
 This section documents how high-fidelity Windows telemetry was enabled on the Windows Server endpoint.
 The focus here is on process, network, and security visibility, which is essential for detection engineering 🧠.
 
-8.1 Downloading Sysmon on Windows Server
+
+### 8.1 Downloading Sysmon on Windows Server
 
 Sysmon was downloaded from the official Microsoft Sysinternals page.
 
 <section> <img src="/screenshots/Download sysmon.png" alt="Download Sysmon" height="350"> </section>
-8.2 Downloading Olaf’s Sysmon Configuration
+
+### 8.2 Downloading Olaf’s Sysmon Configuration
 
 Olaf’s modular Sysmon configuration was used to enable rich endpoint telemetry.
 
@@ -690,12 +744,14 @@ Clicked Raw
 Saved the file into the Sysmon directory
 
 <section> <img src="/screenshots/olaf sysmon config file then click raw and then save it in sysmon folder.png" alt="Olaf Sysmon Config" height="350"> </section>
-8.3 Navigating to Sysmon Directory
+
+### 8.3 Navigating to Sysmon Directory
 
 PowerShell was opened with administrator privileges and navigated to the Sysmon folder.
 
 <section> <img src="/screenshots/navigate to sysmon in powershell and run it.png" alt="Navigate to Sysmon directory" height="350"> </section>
-8.4 Installing Sysmon with Configuration
+
+### 8.4 Installing Sysmon with Configuration
 
 Sysmon was installed using Olaf’s configuration file.
 
@@ -707,7 +763,8 @@ Command executed:
 The license agreement was accepted during installation.
 
 <section> <img src="/screenshots/Sysmon 2nd command.png" alt="Sysmon install command" height="350"> </section>
-8.5 Verifying Sysmon Service
+
+### 8.5 Verifying Sysmon Service
 
 Sysmon service creation was verified via Windows Services.
 
@@ -719,7 +776,8 @@ Service name: Sysmon64
 
 State: Running ⚙️
 
-8.6 Verifying Sysmon Logs in Event Viewer
+
+### 8.6 Verifying Sysmon Logs in Event Viewer
 
 Sysmon logs were confirmed in Event Viewer.
 
@@ -739,7 +797,8 @@ Sysmon is actively collecting telemetry
 
 Process, network, and file events are being logged 📊
 
-8.7 Configuring Sysmon Log Ingestion in Kibana
+
+### 8.7 Configuring Sysmon Log Ingestion in Kibana
 
 To ingest Sysmon logs into Elasticsearch, the Custom Windows Event Logs integration was used.
 
@@ -752,7 +811,8 @@ Navigated to Add Integrations
 Selected Custom Windows Event Logs
 
 <section> <img src="/screenshots/click integration.png" alt="Click integrations" height="370"> </section> <section> <img src="/screenshots/Select custom windows integration.png" alt="Select custom windows integration" height="370"> </section>
-8.8 Configuring Sysmon Event Channel
+
+### 8.8 Configuring Sysmon Event Channel
 
 Sysmon logs were configured using the following channel:
 
@@ -763,7 +823,8 @@ Microsoft-Windows-Sysmon/Operational
 After saving, the integration was added to the Windows agent policy.
 
 <section> <img src="/screenshots/windows log integration added.png" height="370"> </section>
-8.9 Configuring Microsoft Defender Log Ingestion
+
+### 8.9 Configuring Microsoft Defender Log Ingestion
 
 The Defender Operational log channel was identified via Event Viewer.
 
@@ -783,12 +844,14 @@ High-value Defender event IDs added:
 50001 – Real-time protection disabled 🚨
 
 <section> <img src="/screenshots/windows defender log integration conf 1.png" height="370"> <br> <img src="/screenshots/windows defender log integration conf 2.png" height="370"> <br> <img src="/screenshots/windows defender log integration conf 3.png" height="370"> </section> <section> <img src="/screenshots/windows defender log integration added.png" height="370"> </section>
-8.10 Restarting Elastic Agent on Windows
+
+### 8.10 Restarting Elastic Agent on Windows
 
 To apply updated policies, the Elastic Agent was restarted.
 
 <section> <img src="/screenshots/Restart eleastic agent.png" alt="Restart Elastic Agent" height="370"> </section>
-8.11 Verifying Sysmon & Defender Logs in Kibana
+
+### 8.11 Verifying Sysmon & Defender Logs in Kibana
 
 Sysmon process creation events were verified using Event ID 1.
 
@@ -813,7 +876,8 @@ Windows endpoint visibility is fully operational 🛡️
 
 This section documents how the Linux SSH server was integrated into the SOC for authentication telemetry, enabling visibility into real-world SSH brute-force activity 🐧🔐.
 
-9.1 Deploying the Linux SSH Server
+
+### 9.1 Deploying the Linux SSH Server
 
 A dedicated Linux server was deployed to act as an SSH authentication target.
 
@@ -826,14 +890,16 @@ Role: SSH attack surface
 Purpose: Generate authentication telemetry
 
 <section> <img src="/screenshots/Linux ssh server added.png" alt="Linux SSH Server Added" height="370"> </section>
-9.2 Connecting to the Linux Server
+
+### 9.2 Connecting to the Linux Server
 
 An SSH connection was established to the newly deployed Linux server.
 
 Once connected, the system log directory was accessed.
 
 <section> <img src="/screenshots/linux logs file.png" alt="Linux Logs Directory" height="370"> </section>
-9.3 Identifying SSH Authentication Log Source
+
+### 9.3 Identifying SSH Authentication Log Source
 
 The SSH authentication log file was identified at:
 
@@ -848,7 +914,8 @@ successful authentications
 
 usernames and source IP addresses 📄
 
-9.4 Observing Live SSH Brute-Force Attempts
+
+### 9.4 Observing Live SSH Brute-Force Attempts
 
 After leaving the SSH service exposed for some time, automated brute-force attempts began appearing in the logs 🌍.
 
@@ -868,7 +935,8 @@ consistent targeting of high-value accounts ⚠️
 
 This confirmed that the server was receiving real attacker traffic, not simulated data.
 
-9.5 Creating a Linux Agent Policy in Fleet
+
+### 9.5 Creating a Linux Agent Policy in Fleet
 
 To ingest Linux logs into Elasticsearch, a dedicated agent policy was created.
 
@@ -881,7 +949,8 @@ Opened Agent Policies
 Created a new policy named linux-policy
 
 <section> <img src="/screenshots/select fleet.png" alt="Select Fleet" height="370"> </section> <section> <img src="/screenshots/Screenshot 2025-12-09 012916.png" alt="Create Agent Policy" height="370"> </section> <section> <img src="/screenshots/create new agent policy.png" alt="Linux Policy Created" height="370"> </section> <section> <img src="/screenshots/policy conf 1.png" alt="Linux Policy Configuration" height="370"> </section> <section> <img src="/screenshots/go in policy.png" alt="Open Linux Policy" height="370"> </section>
-9.6 Enabling System Integration for Linux Logs
+
+### 9.6 Enabling System Integration for Linux Logs
 
 The System integration was enabled within the Linux agent policy.
 
@@ -894,7 +963,8 @@ system logs
 host metrics 📊
 
 <section> <img src="/screenshots/select system 3.png" alt="Select System Integration" height="370"> </section>
-9.7 Installing Elastic Agent on Linux SSH Server
+
+### 9.7 Installing Elastic Agent on Linux SSH Server
 
 The Add Agent workflow was used to generate the Linux install command.
 
@@ -909,7 +979,8 @@ Enrollment method: Enroll in Fleet
 The command was executed on the Linux SSH server.
 
 <section> <img src="/screenshots/paste the command in terminal.png" alt="Paste Command in Terminal" height="370"> </section>
-9.8 Fixing Certificate Validation Issue
+
+### 9.8 Fixing Certificate Validation Issue
 
 The initial installation failed due to a certificate trust error.
 
@@ -920,12 +991,14 @@ To resolve this, the --insecure flag was added to the command.
 After correction, the Elastic Agent installed successfully.
 
 <section> <img src="/screenshots/elastic agent added on linux.png" alt="Elastic Agent Installed on Linux" height="370"> </section>
-9.9 Verifying Linux Agent Enrollment
+
+### 9.9 Verifying Linux Agent Enrollment
 
 The Linux SSH server appeared in Fleet → Agents with a healthy status.
 
 <section> <img src="/screenshots/Agent enrollment complete on kibana fleet.png" alt="Linux Agent Healthy" height="370"> </section>
-9.10 Validating SSH Logs in Kibana Discover
+
+### 9.10 Validating SSH Logs in Kibana Discover
 
 SSH authentication logs from the Linux server were confirmed in Discover.
 
@@ -946,7 +1019,8 @@ availability of real SSH attack telemetry 🛡️
 
 This section documents how SSH authentication telemetry collected from the Linux server was transformed into detections, alerts, and visual dashboards inside the SOC 🛡️.
 
-10.1 Identifying SSH Failed Authentication Events
+
+### 10.1 Identifying SSH Failed Authentication Events
 
 SSH authentication telemetry was analyzed using Kibana Discover.
 
@@ -971,7 +1045,8 @@ source.ip
 source.geo.country_name
 
 <section> <img src="/screenshots/SSH activity on linux.png" alt="SSH Activity Logs" height="370"> </section>
-10.2 Filtering Failed SSH Authentication Attempts
+
+### 10.2 Filtering Failed SSH Authentication Attempts
 
 To isolate brute-force behavior, the following filter was applied:
 
@@ -987,7 +1062,8 @@ multiple usernames
 
 multiple source IPs 🌍
 
-10.3 Saving the SSH Failed Authentication Query
+
+### 10.3 Saving the SSH Failed Authentication Query
 
 The filtered query was saved for reuse in alerts and dashboards.
 
@@ -998,7 +1074,8 @@ SSH Failed Activity
 
 This saved query acts as the base dataset for detection logic.
 
-10.4 Creating SSH Brute-Force Alert Rule
+
+### 10.4 Creating SSH Brute-Force Alert Rule
 
 An automated alert was created using a search threshold rule.
 
@@ -1009,7 +1086,8 @@ Clicked Alerts
 Selected Create search threshold rule
 
 <section> <img src="/screenshots/create alert.png" alt="Create Alert" height="370"> </section> <section> <img src="/screenshots/create threshold rule.png" alt="Create Threshold Rule" height="370"> </section>
-10.5 Configuring the SSH Brute-Force Rule
+
+### 10.5 Configuring the SSH Brute-Force Rule
 
 Rule configuration:
 
@@ -1023,7 +1101,8 @@ Rule name: ssh brute force activity
 
 Once enabled, the rule continuously monitors SSH failures 🚨.
 
-10.6 Creating SSH Failed Authentication Map
+
+### 10.6 Creating SSH Failed Authentication Map
 
 To visualize attacker origin, a map visualization was created.
 
@@ -1033,7 +1112,8 @@ system.auth.ssh.event : failed
 AND agent.name : "linux-ssh-server"
 
 <section> <img src="/screenshots/create map - 1 for ssh failed activity.png" alt="Create SSH Failed Map Step 1" height="370"> </section> <section> <img src="/screenshots/create map - 2 for ssh failed activity.png" alt="Create SSH Failed Map Step 2" height="370"> </section>
-10.7 Configuring Map Layer Settings
+
+### 10.7 Configuring Map Layer Settings
 
 Map layer configuration:
 
@@ -1047,7 +1127,8 @@ The map was saved with the title:
 ssh failed activity network map
 
 <section> <img src="/screenshots/save the map.png" alt="Save SSH Map" height="370"> </section>
-10.8 Creating Authentication Dashboard
+
+### 10.8 Creating Authentication Dashboard
 
 A new dashboard was created to centralize SSH authentication activity.
 
@@ -1058,7 +1139,8 @@ The dashboard was saved as:
 authentication-activity
 
 <section> <img src="/screenshots/save new dashboard.png" alt="Save Dashboard" height="370"> </section>
-10.9 (Optional) Successful SSH Authentication Visualization
+
+### 10.9 (Optional) Successful SSH Authentication Visualization
 
 A second visualization was created to track successful SSH logins.
 
@@ -1082,7 +1164,8 @@ successful authentication events 🔍
 
 This section documents how Windows authentication telemetry was analyzed and converted into RDP brute-force detections using Windows Security Event Logs. The goal here was to achieve parity with SSH monitoring by applying the same detection rigor to Windows-based access 🔐🪟.
 
-11.1 Identifying Failed Windows Authentication Events
+
+### 11.1 Identifying Failed Windows Authentication Events
 
 Windows authentication logs were analyzed using Kibana → Discover.
 
@@ -1108,7 +1191,8 @@ source.ip
 
 This clearly surfaced repeated authentication failures consistent with brute-force behavior ⚠️.
 
-11.2 Saving the RDP Failed Authentication Query
+
+### 11.2 Saving the RDP Failed Authentication Query
 
 The filtered query was saved for reuse.
 
@@ -1119,7 +1203,8 @@ RDP Failed Activity
 
 This saved search acts as the base dataset for all RDP brute-force detections.
 
-11.3 Creating RDP Brute-Force Alert from Discover
+
+### 11.3 Creating RDP Brute-Force Alert from Discover
 
 Using the saved search, a search threshold alert was created.
 
@@ -1132,7 +1217,8 @@ Clicked Alerts
 Selected Create search threshold rule
 
 <section> <img src="/screenshots/alert for rdp failed activity.png" alt="Create RDP Alert" height="370"> </section>
-11.4 Configuring the RDP Brute-Force Rule
+
+### 11.4 Configuring the RDP Brute-Force Rule
 
 Rule configuration applied:
 
@@ -1147,7 +1233,8 @@ Rule schedule: Every 1 minute
 Rule name: RDP Brute Force Activity
 
 <section> <img src="/screenshots/Create Rule Conf - 1.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 2.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 3.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 4.png" height="370"> </section>
-11.5 Enabling and Verifying the RDP Alert Rule
+
+### 11.5 Enabling and Verifying the RDP Alert Rule
 
 After enabling the rule, alerts were verified in the Security module.
 
@@ -1159,7 +1246,8 @@ Security → Alerts
 
 This confirmed that RDP brute-force activity now triggers alerts 🚨.
 
-11.6 Creating an Advanced RDP Detection Rule (Security Rules Engine)
+
+### 11.6 Creating an Advanced RDP Detection Rule (Security Rules Engine)
 
 To add richer context, a second detection rule was created using the Security → Rules engine.
 
@@ -1172,7 +1260,8 @@ Clicked Create new rule
 Selected Threshold rule
 
 <section> <img src="/screenshots/create rule.png" height="370"> </section> <section> <img src="/screenshots/select create new rules.png" height="370"> </section> <section> <img src="/screenshots/Select threshold.png" height="370"> </section>
-11.7 Configuring Advanced RDP Rule Logic
+
+### 11.7 Configuring Advanced RDP Rule Logic
 
 Rule logic applied:
 
@@ -1195,7 +1284,8 @@ targeted user visibility
 
 frequency-based context 🎯
 
-11.8 Confirming Alert Visibility
+
+### 11.8 Confirming Alert Visibility
 
 After enabling the rule, alerts were confirmed inside the Security dashboard.
 
@@ -1214,7 +1304,8 @@ SOC visibility for RDP attacks 🛡️
 
 This section documents how Windows RDP authentication activity was visualized using maps and tables, allowing quick identification of attack origins, login patterns, and successful access 🗺️🪟.
 
-12.1 Creating RDP Failed Authentication Map
+
+### 12.1 Creating RDP Failed Authentication Map
 
 A geographic visualization was created to track failed RDP authentication attempts.
 
@@ -1240,7 +1331,8 @@ The map was saved as:
 RDP Failed Authentication
 
 <section> <img src="/screenshots/Save map.png" alt="Save RDP Failed Map" width="650"> </section>
-12.2 Creating RDP Successful Authentication Map
+
+### 12.2 Creating RDP Successful Authentication Map
 
 To visualize successful RDP logins, a second map was created.
 
@@ -1260,7 +1352,8 @@ Logon Type 7 → RDP unlock events
 
 This map highlights confirmed successful remote access, helping distinguish noise from real intrusion 🔍.
 
-12.3 Adding Visualizations to Authentication Dashboard
+
+### 12.3 Adding Visualizations to Authentication Dashboard
 
 Both RDP maps were added to the existing Authentication Activity dashboard.
 
@@ -1273,7 +1366,8 @@ Clicked Add → Visualization
 Selected saved map visualizations
 
 <section> <img src="/screenshots/open visualization.png" alt="Open Visualization Menu" width="650"> </section>
-12.4 Creating Table Visualization for RDP Failures
+
+### 12.4 Creating Table Visualization for RDP Failures
 
 A table visualization was added to complement map-based views.
 
@@ -1296,7 +1390,8 @@ source.geo.country_name
 Event count
 
 <section> <img src="/screenshots/visualization for rdp failed.png" alt="RDP Failed Table Visualization" width="650"> </section>
-12.5 Final Authentication Activity Dashboard
+
+### 12.5 Final Authentication Activity Dashboard
 
 The completed dashboard now includes:
 
@@ -1322,7 +1417,8 @@ This dashboard acts as the central authentication intelligence view of the SOC.
 This section documents the pre-attack planning phase, where the complete intrusion path against the Windows Server was designed before executing any attack.
 The objective was to ensure that every attacker action would generate observable telemetry and map cleanly to existing detections 🧠⚔️.
 
-13.1 Designing the Attack Flow
+
+### 13.1 Designing the Attack Flow
 
 A detailed attack flow diagram was created to map the full adversary lifecycle from initial access to post-compromise activity.
 
@@ -1345,7 +1441,8 @@ command-and-control communication
 This diagram serves as a blueprint for validating SOC visibility and detections.
 
 <section> <img src="/screenshots/attack_diagram.png" alt="Attack Vector Diagram" width="650"> </section>
-13.2 Mapping Attack Steps to Telemetry
+
+### 13.2 Mapping Attack Steps to Telemetry
 
 Each stage of the attack was intentionally mapped to expected telemetry sources:
 
@@ -1366,7 +1463,8 @@ Defense evasion
 
 This ensured that detections built earlier would be provably testable, not theoretical.
 
-13.3 Defining Validation Objectives
+
+### 13.3 Defining Validation Objectives
 
 Before launching the attack, the following validation goals were defined:
 
@@ -1382,7 +1480,8 @@ confirm detections can be investigated end-to-end 🔁
 
 No attack activity was performed during this stage — only planning and validation alignment.
 
-13.4 Preparing for Controlled Execution
+
+### 13.4 Preparing for Controlled Execution
 
 With the attack vector finalized:
 
@@ -1404,7 +1503,8 @@ This section documents the deployment of the Mythic Command-and-Control (C2) ser
 
 The C2 infrastructure is intentionally separated from the SOC network to accurately represent external attacker-controlled systems.
 
-14.1 Deploying the Mythic C2 Server
+
+### 14.1 Deploying the Mythic C2 Server
 
 A dedicated cloud VM was provisioned to host the Mythic C2 framework.
 
@@ -1421,7 +1521,8 @@ RAM: 4 GB
 Purpose: Adversary C2 infrastructure
 
 <img src="/screenshots/Mythic C2 Server Created.png" width="650">
-14.2 Preparing the Server Environment
+
+### 14.2 Preparing the Server Environment
 
 After deployment, the server was accessed via SSH and system packages were updated.
 
@@ -1430,7 +1531,8 @@ Commands executed:
 apt-get update
 apt-get upgrade -y
 
-14.3 Installing Required Dependencies
+
+### 14.3 Installing Required Dependencies
 
 Mythic relies on Docker, Docker Compose, and Make.
 
@@ -1441,7 +1543,8 @@ Installed Docker Compose
 Installed Make
 
 <img src="/screenshots/install docker compose.png" width="650"> <img src="/screenshots/install make.png" width="650">
-14.4 Cloning the Mythic Repository
+
+### 14.4 Cloning the Mythic Repository
 
 The official Mythic repository was cloned from GitHub.
 
@@ -1450,7 +1553,8 @@ Command executed:
 git clone https://github.com/its-a-feature/Mythic
 
 <img src="/screenshots/clone github mythic repo.png" width="650">
-14.5 Installing Docker Support for Mythic
+
+### 14.5 Installing Docker Support for Mythic
 
 Inside the Mythic directory, Docker support scripts were executed.
 
@@ -1459,7 +1563,8 @@ Command executed:
 ./install_docker_ubuntu.sh
 
 <img src="/screenshots/install docker for ubuntu.png" width="650">
-14.6 Resolving Docker Daemon Issue
+
+### 14.6 Resolving Docker Daemon Issue
 
 The initial make command failed because the Docker daemon was not running.
 
@@ -1474,7 +1579,8 @@ systemctl status docker
 After restarting Docker, the build process succeeded.
 
 <img src="/screenshots/now make works.png" width="650">
-14.7 Starting the Mythic C2 Service
+
+### 14.7 Starting the Mythic C2 Service
 
 Mythic services were started using the Mythic CLI.
 
@@ -1494,7 +1600,8 @@ messaging components
 
 C2 profiles infrastructure
 
-14.8 Configuring Firewall Rules for Mythic
+
+### 14.8 Configuring Firewall Rules for Mythic
 
 Firewall rules were configured to restrict access to the Mythic server.
 
@@ -1514,7 +1621,8 @@ Linux SSH server public IP
 
 This ensured the C2 server was not publicly exposed 🌐🚫.
 
-14.9 Accessing the Mythic Web Interface
+
+### 14.9 Accessing the Mythic Web Interface
 
 The Mythic UI was accessed via HTTPS on port 7443.
 
@@ -1526,7 +1634,8 @@ https://<mythic-server-ip>:7443
 Default credentials were retrieved from the .env file.
 
 <img src="/screenshots/mythic login.png" width="650"> <img src="/screenshots/find password - 1.png" width="650"> <img src="/screenshots/find password - 2.png" width="650"> <img src="/screenshots/find password - 3.png" width="650">
-14.10 Mythic Dashboard Verification
+
+### 14.10 Mythic Dashboard Verification
 
 After authentication, the Mythic dashboard loaded successfully.
 
@@ -1552,12 +1661,14 @@ This confirmed the Mythic C2 infrastructure was fully operational and ready for 
 This section documents the complete adversary kill-chain execution against the Windows Server — from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.
 All actions performed here were intentionally designed to generate telemetry for validation in later detection stages.
 
-15.1 Staging Fake Sensitive Data on Windows Server
+
+### 15.1 Staging Fake Sensitive Data on Windows Server
 
 Before launching the attack, a fake credentials file was created on the Windows Server to simulate sensitive data for post-compromise scenarios.
 
 <section> <img src="/screenshots/create fake passwords file on windows server.png" width="620"> </section>
-15.2 Preparing the Brute-Force Wordlist
+
+### 15.2 Preparing the Brute-Force Wordlist
 
 A custom password list was prepared using rockyou.txt.
 
@@ -1570,7 +1681,8 @@ Opened the reduced wordlist
 Appended the valid password manually
 
 <section> <img src="/screenshots/attack from kali - 1.png" width="610"> </section> <section> <img src="/screenshots/attack from kali - 2.png" width="610"> </section> <section> <img src="/screenshots/attack from kali - 3.png" width="610"> </section>
-15.3 Executing RDP Brute-Force Attack
+
+### 15.3 Executing RDP Brute-Force Attack
 
 The brute-force attack was executed using Hydra against the Windows Server RDP service.
 
@@ -1579,7 +1691,8 @@ The brute-force attack was executed using Hydra against the Windows Server RDP s
 Valid credentials were successfully discovered.
 
 <section> <img src="/screenshots/Using hydra to do brute force - 2.png" width="610"> </section>
-15.4 Establishing RDP Session
+
+### 15.4 Establishing RDP Session
 
 With valid credentials obtained, an interactive RDP session was established using xfreerdp.
 
@@ -1588,27 +1701,32 @@ With valid credentials obtained, an interactive RDP session was established usin
 Successful login confirmed access to the Windows desktop.
 
 <section> <img src="/screenshots/brute force success.png" width="610"> </section>
-15.5 Post-Login Discovery Commands
+
+### 15.5 Post-Login Discovery Commands
 
 Basic reconnaissance commands were executed to enumerate system context and generate telemetry.
 
 <section> <img src="/screenshots/commands executed.png" width="620"> </section>
-15.6 Defense Evasion – Disabling Microsoft Defender
+
+### 15.6 Defense Evasion – Disabling Microsoft Defender
 
 Microsoft Defender real-time protection was intentionally disabled to simulate attacker defense evasion.
 
 <section> <img src="/screenshots/defense evasion using kali.png" width="620"> </section>
-15.7 Installing Apollo Agent on Mythic
+
+### 15.7 Installing Apollo Agent on Mythic
 
 On the Mythic server, the Apollo agent was installed and made available.
 
 <section> <img src="/screenshots/Installing apollo on mythic server.png" width="610"> </section> <section> <img src="/screenshots/apollo agent visible on mythic gui.png" width="610"> </section>
-15.8 Installing HTTP C2 Profile
+
+### 15.8 Installing HTTP C2 Profile
 
 The HTTP C2 profile was installed and enabled.
 
 <section> <img src="/screenshots/install mythic http profile.png" width="610"> </section> <section> <img src="/screenshots/http profile visible on mythic gui.png" width="610"> </section>
-15.9 Building the Mythic Payload
+
+### 15.9 Building the Mythic Payload
 
 A Windows executable payload was created using Apollo with the HTTP C2 profile.
 
@@ -1617,12 +1735,14 @@ A Windows executable payload was created using Apollo with the HTTP C2 profile.
 Payload download link was copied.
 
 <section> <img src="/screenshots/copy link for payload.png" width="610"> </section>
-15.10 Hosting the Payload
+
+### 15.10 Hosting the Payload
 
 The payload was downloaded, renamed, and hosted using a Python HTTP server.
 
 <section> <img src="/screenshots/run wget command for the payload.png" width="610"> </section> <section> <img src="/screenshots/payload operations.png" width="610"> </section> <section> <img src="/screenshots/Started python server on port 9999 from mythic server.png" width="610"> </section>
-15.11 Executing Payload on Windows Server
+
+### 15.11 Executing Payload on Windows Server
 
 The payload was downloaded and executed on the Windows Server.
 
@@ -1631,7 +1751,8 @@ The payload was downloaded and executed on the Windows Server.
 The process appeared in Task Manager.
 
 <section> <img src="/screenshots/svchost-pranav runnig in task manager.png" width="610"> </section>
-15.12 Observing Network Callback Attempt
+
+### 15.12 Observing Network Callback Attempt
 
 Initial network connections were observed in a SYN_SENT state.
 
@@ -1640,7 +1761,8 @@ Initial network connections were observed in a SYN_SENT state.
 Firewall rules were updated to allow outbound traffic.
 
 <section> <img src="/screenshots/made change in ufw port 80.png" width="610"> </section>
-15.13 C2 Callback Established
+
+### 15.13 C2 Callback Established
 
 After firewall changes, the C2 callback appeared in the Mythic dashboard.
 
@@ -1649,7 +1771,8 @@ After firewall changes, the C2 callback appeared in the Mythic dashboard.
 Connection status confirmed.
 
 <section> <img src="/screenshots/connection established.png" width="610"> </section>
-15.14 Executing Commands via Mythic C2
+
+### 15.14 Executing Commands via Mythic C2
 
 Commands were successfully executed through the Mythic interface against the compromised Windows Server.
 
@@ -1666,7 +1789,8 @@ This confirmed full post-compromise control of the endpoint 🎯.
 This section documents how post-compromise activity generated in Section 15 was detected using Sysmon telemetry, custom detection rules, and dashboards.
 The goal here was to validate that real C2 activity leaves observable and actionable security signals 🧠🚨.
 
-16.1 Identifying Payload Execution via Sysmon (Process Creation)
+
+### 16.1 Identifying Payload Execution via Sysmon (Process Creation)
 
 To detect execution of the Mythic Apollo payload, Sysmon Event ID 1 (Process Create) was analyzed.
 
@@ -1690,7 +1814,8 @@ hash values
 
 parent process context
 
-16.2 Creating a Custom Detection Rule for Mythic Payload Execution
+
+### 16.2 Creating a Custom Detection Rule for Mythic Payload Execution
 
 A custom rule was created to detect Apollo agent execution.
 
@@ -1722,7 +1847,8 @@ Schedule: Every 5 minutes
 
 Lookback: 5 minutes 🎯
 
-16.3 Creating Suspicious Process Execution Visualization
+
+### 16.3 Creating Suspicious Process Execution Visualization
 
 A visualization was created to track suspicious process execution patterns, commonly used by attackers.
 
@@ -1735,7 +1861,8 @@ unusual process names
 non-standard execution paths
 
 <section> <img src="/screenshots/creating visualization for dashboard.png" width="720"> </section>
-16.4 Visualizing Outbound Network Connections
+
+### 16.4 Visualizing Outbound Network Connections
 
 To detect C2-like behavior, a visualization was built to show process-initiated outbound connections 🌐.
 
@@ -1748,7 +1875,8 @@ unexpected external communication
 callback patterns
 
 <section> <img src="/screenshots/creating 2nd visualization for dashboard.png" width="720"> </section>
-16.5 Detecting Microsoft Defender Tampering
+
+### 16.5 Detecting Microsoft Defender Tampering
 
 Defense evasion behavior was detected using Microsoft Defender Event ID 50001.
 
@@ -1759,7 +1887,8 @@ Defender real-time protection disable events
 attacker attempts to weaken endpoint security 🛑
 
 <section> <img src="/screenshots/creating 3rd visualization for dashboard.png" width="720"> </section>
-16.6 Building the Suspicious Activity Dashboard
+
+### 16.6 Building the Suspicious Activity Dashboard
 
 All detection-focused visualizations were combined into a single dashboard.
 
@@ -1789,7 +1918,8 @@ This dashboard provides centralized visibility into post-compromise behavior and
 This section documents the deployment and configuration of OS Ticket, which acts as the case management and incident tracking system for the SOC.
 This system is later integrated with Elastic to automate alert-to-ticket workflows 🧾⚙️.
 
-17.1 Deploying the OS Ticket Server
+
+### 17.1 Deploying the OS Ticket Server
 
 A dedicated Windows Server 2022 virtual machine was deployed to host OS Ticket.
 
@@ -1798,13 +1928,15 @@ A dedicated Windows Server 2022 virtual machine was deployed to host OS Ticket.
 The server was accessed via Remote Desktop.
 
 <section> <img src="/screenshots/open osTicket using remote desktop provider.png" width="720"> </section>
-17.2 Installing XAMPP (Apache, PHP, MySQL)
+
+### 17.2 Installing XAMPP (Apache, PHP, MySQL)
 
 OS Ticket requires a web server, PHP, and a database backend.
 XAMPP was installed to provide all required services.
 
 <section> <img src="/screenshots/download xampp.png" width="720"> </section> <section> <img src="/screenshots/xampp install.png" width="720"> </section>
-17.3 Modifying XAMPP Configuration Files
+
+### 17.3 Modifying XAMPP Configuration Files
 
 Configuration changes were applied to ensure OS Ticket compatibility.
 
@@ -1817,12 +1949,14 @@ A backup of the configuration file was created.
 Database configuration changes were applied.
 
 <section> <img src="/screenshots/made changes in config.inc.php file in phpmyadmin.png" width="720"> </section>
-17.4 Creating Windows Firewall Rules
+
+### 17.4 Creating Windows Firewall Rules
 
 Inbound firewall rules were created to allow HTTP and HTTPS traffic.
 
 <section> <img src="/screenshots/create a new inbound rule.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 1.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 2.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 3.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 4.png" width="720"> </section>
-17.5 Starting Apache & MySQL Services
+
+### 17.5 Starting Apache & MySQL Services
 
 Services were started from the XAMPP control panel.
 
@@ -1831,7 +1965,8 @@ Services were started from the XAMPP control panel.
 The phpMyAdmin interface was opened.
 
 <section> <img src="/screenshots/click admin.png" width="720"> </section> <section> <img src="/screenshots/click phpmyadmin.png" width="720"> </section>
-17.6 Fixing phpMyAdmin Database Errors
+
+### 17.6 Fixing phpMyAdmin Database Errors
 
 Initial access to phpMyAdmin resulted in errors.
 
@@ -1843,12 +1978,14 @@ Several configuration and privilege fixes were applied.
 
 After these changes, phpMyAdmin became fully accessible.
 
-17.7 Downloading and Installing OS Ticket
+
+### 17.7 Downloading and Installing OS Ticket
 
 OS Ticket was downloaded and the installer was launched.
 
 <section> <img src="/screenshots/install osticket.png" width="720"> </section> <section> <img src="/screenshots/choose osticket version.png" width="720"> </section> <section> <img src="/screenshots/os ticket installer page.png" width="720"> </section>
-17.8 Resolving OS Ticket Installation Issues
+
+### 17.8 Resolving OS Ticket Installation Issues
 
 The initial installation attempt failed due to missing configuration.
 
@@ -1860,7 +1997,8 @@ Required configuration changes were applied.
 
 After correction, the installer completed successfully.
 
-17.9 Verifying OS Ticket Access
+
+### 17.9 Verifying OS Ticket Access
 
 OS Ticket web interface was successfully accessed via browser.
 
@@ -1881,7 +2019,8 @@ ticketing platform is ready for integration 🧠🧾
 
 This section documents how Elastic detections were integrated with OS Ticket to automatically convert security alerts into tickets, enabling structured investigation and case tracking 🧾🔁.
 
-18.1 Creating an API Key in OS Ticket
+
+### 18.1 Creating an API Key in OS Ticket
 
 An API key was generated in OS Ticket to allow Elastic to create tickets programmatically.
 
@@ -1896,7 +2035,8 @@ Created a new API key
 Allowed access from the Elastic server’s private IP
 
 <section> <img src="/screenshots/add new api key in osticket.png" width="720"> </section> <section> <img src="/screenshots/add key.png" width="720"> </section>
-18.2 Enabling Elastic Connector Support
+
+### 18.2 Enabling Elastic Connector Support
 
 Webhook connectors require Elastic’s trial license.
 
@@ -1909,7 +2049,8 @@ Navigated to License Management
 Activated the 30-day trial
 
 <section> <img src="/screenshots/open stack management.png" width="720"> </section> <section> <img src="/screenshots/click manage 30 day licence.png" width="720"> </section>
-18.3 Creating a Webhook Connector in Elastic
+
+### 18.3 Creating a Webhook Connector in Elastic
 
 A webhook connector was created to send alert data to OS Ticket.
 
@@ -1932,7 +2073,8 @@ X-API-Key: <OS_TICKET_API_KEY>
 Payload format: XML
 
 <section> <img src="/screenshots/go to connector.png" width="720"> </section> <section> <img src="/screenshots/webhook connector conf.png" width="720"> </section>
-18.4 Resolving Network Connectivity Issue
+
+### 18.4 Resolving Network Connectivity Issue
 
 Initial connector testing failed due to incorrect IP configuration on the OS Ticket server.
 
@@ -1943,7 +2085,8 @@ Checked network adapter IP on OS Ticket server
 Updated configuration to use the correct private VPC IP
 
 <section> <img src="/screenshots/ipconfig on osticket server.png" width="720"> </section> <section> <img src="/screenshots/wrong ip problem solved.png" width="720"> </section>
-18.5 Validating Webhook Connectivity
+
+### 18.5 Validating Webhook Connectivity
 
 After fixing the IP issue, the webhook test was executed again.
 
@@ -1957,7 +2100,8 @@ API authentication is valid
 
 Ticket creation endpoint is functional 🎯
 
-18.6 Test Ticket Creation in OS Ticket
+
+### 18.6 Test Ticket Creation in OS Ticket
 
 A test alert generated a ticket inside OS Ticket.
 
@@ -1985,7 +2129,8 @@ investigation reference
 This section documents how alerts generated by Elastic are handled by a SOC analyst, investigated using telemetry and dashboards, and finally resolved using OS Ticket 🧠🛡️.
 The focus here is on operational response, not detection creation.
 
-19.1 Receiving an Alert in Elastic Security
+
+### 19.1 Receiving an Alert in Elastic Security
 
 When a detection rule triggers, the alert appears in the Elastic Security dashboard.
 
@@ -2011,7 +2156,8 @@ timestamp
 
 source IP 🌍
 
-19.2 Automatic Ticket Creation in OS Ticket
+
+### 19.2 Automatic Ticket Creation in OS Ticket
 
 Once the alert triggered, a ticket was automatically created in OS Ticket through the webhook connector.
 
@@ -2033,7 +2179,8 @@ event timestamp
 
 SOC reference information 🧾
 
-19.3 Assigning the Ticket to an Analyst
+
+### 19.3 Assigning the Ticket to an Analyst
 
 The ticket was assigned to an analyst for investigation.
 
@@ -2047,7 +2194,8 @@ accountability
 
 proper tracking of investigation progress 📌
 
-19.4 Investigating the Alert in Kibana
+
+### 19.4 Investigating the Alert in Kibana
 
 The analyst pivoted back to Kibana to investigate the alert.
 
@@ -2060,7 +2208,8 @@ Reviewed surrounding authentication events
 Checked if any login was successful
 
 <img src="/screenshots/investigation - 2.png" width="750" height="420"> <img src="/screenshots/investigation - 3.png" width="750" height="420">
-19.5 Validating Attacker Source and Behavior
+
+### 19.5 Validating Attacker Source and Behavior
 
 Source IP addresses were analyzed for threat context.
 
@@ -2082,7 +2231,8 @@ targeted attack
 
 successful intrusion ⚠️
 
-19.6 Cross-Checking Dashboards
+
+### 19.6 Cross-Checking Dashboards
 
 The analyst reviewed dashboards for broader context.
 
@@ -2103,7 +2253,8 @@ lateral movement occurred
 
 post-exploitation behavior was observed 🔍
 
-19.7 Updating Ticket with Investigation Notes
+
+### 19.7 Updating Ticket with Investigation Notes
 
 Findings were documented directly inside the OS Ticket.
 
@@ -2116,7 +2267,8 @@ Noted IP addresses and usernames
 Recorded conclusion
 
 <img src="/screenshots/post reply to ticket.png" width="750" height="420">
-19.8 Closing the Ticket
+
+### 19.8 Closing the Ticket
 
 After confirming no further malicious activity, the ticket was closed.
 
@@ -2137,7 +2289,8 @@ Detect → Alert → Ticket → Investigate → Document → Close
 This section documents the final operational state of the SOC after all infrastructure, detections, attack simulations, and response workflows were implemented and validated 🧠🛡️.
 At this stage, the SOC is not a setup — it is a functioning security operations environment.
 
-20.1 End-to-End SOC Lifecycle Validation
+
+### 20.1 End-to-End SOC Lifecycle Validation
 
 The SOC was validated using real attack activity and confirmed telemetry flow across all layers.
 
@@ -2155,7 +2308,8 @@ Endpoint Activity
 
 Each stage was observed live during SSH brute-force, RDP brute-force, and Mythic C2 attack execution 🔁.
 
-20.2 Telemetry Coverage Validation
+
+### 20.2 Telemetry Coverage Validation
 
 Telemetry sources confirmed operational:
 
@@ -2177,7 +2331,8 @@ searchable in Discover
 
 correlated across dashboards
 
-20.3 Detection Coverage Achieved
+
+### 20.3 Detection Coverage Achieved
 
 The SOC successfully detected:
 
@@ -2197,7 +2352,8 @@ Microsoft Defender tampering 🚨
 
 Each detection generated alerts that were actionable and traceable.
 
-20.4 Dashboard & Visibility Confirmation
+
+### 20.4 Dashboard & Visibility Confirmation
 
 Dashboards confirmed working visibility across attack stages:
 
@@ -2211,7 +2367,8 @@ Process & Network Behavior Views 📈
 
 These dashboards allowed rapid triage and context building during investigations.
 
-20.5 Automated Case Management Validation
+
+### 20.5 Automated Case Management Validation
 
 Alert-to-ticket automation functioned as designed:
 
@@ -2223,7 +2380,8 @@ Analysts were able to assign, investigate, update, and close tickets 🧾
 
 This validated SOC operational maturity, not just alerting capability.
 
-20.6 Separation of Attacker & Defender Infrastructure
+
+### 20.6 Separation of Attacker & Defender Infrastructure
 
 A clear separation was maintained throughout:
 
@@ -2235,7 +2393,8 @@ Mythic C2 operated externally as attacker-controlled infrastructure ⚔️
 
 This ensured realistic attack simulation without weakening defensive posture.
 
-20.7 Final Operational State
+
+### 20.7 Final Operational State
 
 At completion, the SOC environment delivered:
 
@@ -2261,7 +2420,8 @@ The SOC operated as a cohesive system, not a collection of tools.
 
 This section outlines potential extensions to further strengthen detection depth and SOC maturity 🧠🚀.
 
-21.1 MITRE ATT&CK Mapping
+
+### 21.1 MITRE ATT&CK Mapping
 
 Map detections to MITRE ATT&CK techniques
 
@@ -2269,7 +2429,8 @@ Track coverage across attack stages
 
 Identify visibility gaps and blind spots 🎯
 
-21.2 EDR Correlations
+
+### 21.2 EDR Correlations
 
 Correlate process, network, and authentication events
 
@@ -2277,7 +2438,8 @@ Track parent–child process relationships
 
 Improve confidence in post-exploitation detections 🛡️
 
-21.3 Sigma Rule Integration
+
+### 21.3 Sigma Rule Integration
 
 Import community Sigma rules
 
@@ -2285,7 +2447,8 @@ Convert Sigma logic into Elastic queries
 
 Validate rules using existing attack simulations 📄
 
-21.4 DNS & Beaconing Detection
+
+### 21.4 DNS & Beaconing Detection
 
 Detect periodic outbound traffic patterns
 
