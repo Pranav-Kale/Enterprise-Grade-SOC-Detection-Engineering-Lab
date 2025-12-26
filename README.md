@@ -34,8 +34,9 @@ Modern cybersecurity failures rarely happen because security tools are missing. 
 The Enterprise Grade SOC & Detection Engineering Lab is a fully integrated SOC environment built to replicate how security operations function inside an enterprise network. This project focuses on how individual security components work together, rather than showcasing tools in isolation 🔗.
 
 The lab reflects real SOC thinking — visibility first, detection second, response always 🚨.
-
+<p align="center">     
 <img src="/SOC_Project_Diagram.png" width="700" height="auto">
+</p>
 
 ### Project Intent
 
@@ -176,7 +177,11 @@ Steps performed:
 - Created a new VPC network
 - Assigned private CIDR block
 
-<img src="/screenshots/Add VPC Network.png" width="700" height="420"> <img src="/screenshots/VPC Conf.png" width="700" height="420"> <img src="/screenshots/VPC network created.png" width="700" height="420">
+<p align="center">      
+<img src="/screenshots/Add VPC Network.png" width="700" height="420"> 
+<img src="/screenshots/VPC Conf.png" width="700" height="420"> 
+<img src="/screenshots/VPC network created.png" width="700" height="420">
+</p>
 
 This VPC serves as the isolated internal SOC network.
 
@@ -191,7 +196,12 @@ Steps performed:
 - Attached it to the SOC VPC
 - Verified instance creation
 
-<img src="/screenshots/Compute and deploy button.png" width="700" height="420"> <img src="/screenshots/VPC gateway conf.png" width="700" height="420"> <img src="/screenshots/VPC Gateway Created and Running.png" width="700" height="420"> <img src="/screenshots/VPC Gateway.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/Compute and deploy button.png" width="700" height="420"> 
+<img src="/screenshots/VPC gateway conf.png" width="700" height="420"> 
+<img src="/screenshots/VPC Gateway Created and Running.png" width="700" height="420"> 
+<img src="/screenshots/VPC Gateway.png" width="700" height="420">
+</p>
 
 ### 4.3 Verifying Gateway Connectivity
 
@@ -212,7 +222,12 @@ Steps performed:
 - Accessed Zero Trust dashboard
 - Defined team name
 
-<img src="/screenshots/Cloudflare signup.png" width="700" height="420"> <img src="/screenshots/Cloudflare Dashboard.png" width="700" height="420"> <img src="/screenshots/Team Name.png" width="700" height="420"> <img src="/screenshots/Zero Trust Dashboard.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/Cloudflare signup.png" width="700" height="420"> 
+<img src="/screenshots/Cloudflare Dashboard.png" width="700" height="420"> 
+<img src="/screenshots/Team Name.png" width="700" height="420"> 
+<img src="/screenshots/Zero Trust Dashboard.png" width="700" height="420">
+</p>
 
 ### 4.5 Installing Cloudflare WARP on Analyst Device
 
@@ -223,7 +238,13 @@ Steps performed:
 - Downloaded WARP client
 - Installed and connected WARP
 
-<img src="/screenshots/Add a device.png" width="700" height="420"> <img src="/screenshots/Download WARp.png" width="700" height="420"> <img src="/screenshots/WARP Download.png" width="700" height="420"> <img src="/screenshots/Cloudflare Warp installation.png" width="700" height="420"> <img src="/screenshots/WARP Connected.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/Add a device.png" width="700" height="420"> 
+<img src="/screenshots/Download WARp.png" width="700" height="420"> 
+<img src="/screenshots/WARP Download.png" width="700" height="420"> 
+<img src="/screenshots/Cloudflare Warp installation.png" width="700" height="420"> 
+<img src="/screenshots/WARP Connected.png" width="700" height="420">
+</p>
 
 ### 4.6 Installing Cloudflare Tunnel on the Gateway
 
@@ -234,7 +255,14 @@ Steps performed:
 - Selected Debian install method
 - Installed and started cloudflared
 
-<img src="/screenshots/Create a Connector.png" width="700" height="420"> <img src="/screenshots/Select Cloudflare connector.png" width="700" height="420"> <img src="/screenshots/name the tunnel.png" width="700" height="420"> <img src="/screenshots/Choose Debian.png" width="700" height="420"> <img src="/screenshots/Install cloudflared.png" width="700" height="420"> <img src="/screenshots/Cloudflared Installed and configured.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/Create a Connector.png" width="700" height="420"> 
+<img src="/screenshots/Select Cloudflare connector.png" width="700" height="420"> 
+<img src="/screenshots/name the tunnel.png" width="700" height="420"> 
+<img src="/screenshots/Choose Debian.png" width="700" height="420"> 
+<img src="/screenshots/Install cloudflared.png" width="700" height="420"> 
+<img src="/screenshots/Cloudflared Installed and configured.png" width="700" height="420">
+</p>
 
 ### 4.7 Adding Private Routes to the Tunnel
 
@@ -263,13 +291,25 @@ To allow traffic flow between WARP clients and internal hosts, NAT was configure
 
 Device enrollment policies were configured to restrict access.
 
-<img src="/screenshots/WARP Preferences.png" width="700" height="420"> <img src="/screenshots/WARP Zero trust login button.png" width="700" height="420"> <img src="/screenshots/WARP Login page.png" width="700" height="420"> <img src="/screenshots/WARP zero trust success.png" width="700" height="420"> <img src="/screenshots/Device Enrollement manage button.png" width="700" height="420"> <img src="/screenshots/Edit default policy.png" width="700" height="420"> <img src="/screenshots/Enrollment policy added.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/WARP Preferences.png" width="700" height="420"> 
+<img src="/screenshots/WARP Zero trust login button.png" width="700" height="420"> 
+<img src="/screenshots/WARP Login page.png" width="700" height="420"> 
+<img src="/screenshots/WARP zero trust success.png" width="700" height="420"> 
+<img src="/screenshots/Device Enrollement manage button.png" width="700" height="420"> 
+<img src="/screenshots/Edit default policy.png" width="700" height="420"> 
+<img src="/screenshots/Enrollment policy added.png" width="700" height="420">
+</p>
 
 ### 4.11 Split Tunnel Configuration
 
 Only SOC VPC traffic was routed through WARP.
 
-<img src="/screenshots/Cloudflare plans.png" width="700" height="420"> <img src="/screenshots/Screenshot 2025-12-07 173351.png" width="700" height="420"> <img src="/screenshots/Split Tunnel Changes.png" width="700" height="420">
+<p align="center">    
+<img src="/screenshots/Cloudflare plans.png" width="700" height="420"> 
+<img src="/screenshots/Screenshot 2025-12-07 173351.png" width="700" height="420"> 
+<img src="/screenshots/Split Tunnel Changes.png" width="700" height="420">
+</p>
 
 
 
@@ -290,7 +330,10 @@ A dedicated VM was deployed inside the SOC VPC to host Elasticsearch.
 
 SSH access was tested using the private VPC IP.
 
-<img src="/screenshots/SSh to elk server.png" width="700" height="420"> <img src="/screenshots/Check private ip on vultr.png" width="700" height="420">
+<p align="center">  
+<img src="/screenshots/SSh to elk server.png" width="700" height="420">
+<img src="/screenshots/Check private ip on vultr.png" width="700" height="420">
+ </p>
 
 This confirmed:
 - Cloudflare Tunnel routing
@@ -319,7 +362,10 @@ The official Elasticsearch .deb installer link was copied from the Elastic websi
 
 Elasticsearch was downloaded and installed using wget and dpkg.
 
-<img src="/screenshots/wget command for elastic search.png" width="700" height="420"> <img src="/screenshots/install elastic search.png" width="700" height="420">
+<p align="center"> 
+<img src="/screenshots/wget command for elastic search.png" width="700" height="420"> 
+<img src="/screenshots/install elastic search.png" width="700" height="420">
+</p>
 
 ### 5.6 Saving Elasticsearch Security Credentials
 
@@ -335,7 +381,10 @@ These credentials were saved for later use.
 
 The Elasticsearch configuration file was modified to bind only to the private VPC IP.
 
-<img src="/screenshots/open elasticsearch conf file.png" width="700" height="420"> <img src="/screenshots/Elastic.yml changes.png" width="700" height="420">
+<p align="center">
+<img src="/screenshots/open elasticsearch conf file.png" width="700" height="420"> 
+<img src="/screenshots/Elastic.yml changes.png" width="700" height="420">
+<p align="center">      
 
 Configuration applied:
 
@@ -369,7 +418,10 @@ Kibana was installed using the downloaded package.
 
 Kibana configuration file was edited to define host and port.
 
-<img src="/screenshots/open kibana.yml.png" width="700" height="420"> <img src="/screenshots/Changes in kibana.yml.png" width="700" height="420">
+<p align="center">
+<img src="/screenshots/open kibana.yml.png" width="700" height="420"> 
+<img src="/screenshots/Changes in kibana.yml.png" width="700" height="420">
+ </p>
 
 Initial configuration:
 
@@ -419,7 +471,10 @@ Enrollment token was entered to complete Kibana setup.
 
 Verification code was generated and entered.
 
-<img src="/screenshots/Kibana Verification Required.png" width="700" height="420"> <img src="/screenshots/get verififcation code for kibana.png" width="700" height="420">
+<p align="center">
+<img src="/screenshots/Kibana Verification Required.png" width="700" height="420"> 
+<img src="/screenshots/get verififcation code for kibana.png" width="700" height="420">
+</p>
 
 ### 5.18 Logging into Kibana
 
@@ -435,7 +490,10 @@ Initial alert errors were observed.
 
 Encryption keys were generated and added.
 
-<img src="/screenshots/Getting encryption keys to solve the problem of errors in alerts.png" width="700" height="420"> <img src="/screenshots/Enter the encryption keys in kibana keystore.png" width="700" height="420">
+<p align="center">
+<img src="/screenshots/Getting encryption keys to solve the problem of errors in alerts.png" width="700" height="420"> 
+<img src="/screenshots/Enter the encryption keys in kibana keystore.png" width="700" height="420">
+</p>
 
 After restart, errors were resolved.
 
@@ -629,7 +687,10 @@ Enrollment failed due to certificate validation.
 
 To fix this, the --insecure flag was added.
 
-<img src="/screenshots/Make some correction in command.png" width="700" height="420"> <img src="/screenshots/changes in the command for elastic agent.png" width="700" height="420">
+<p align="center">
+<img src="/screenshots/Make some correction in command.png" width="700" height="420"> 
+<img src="/screenshots/changes in the command for elastic agent.png" width="700" height="420">
+ </p>
 
 Final command format:
 
@@ -685,7 +746,9 @@ Steps performed:
 - Clicked Raw
 - Saved the file into the Sysmon directory
 
+<p align="center">    
 <section> <img src="/screenshots/olaf sysmon config file then click raw and then save it in sysmon folder.png" alt="Olaf Sysmon Config" height="350"> </section>
+ </p>
 
 ### 8.3 Navigating to Sysmon Directory
 
@@ -744,7 +807,10 @@ Steps performed:
 - Navigated to Add Integrations
 - Selected Custom Windows Event Logs
 
-<section> <img src="/screenshots/click integration.png" alt="Click integrations" height="370"> </section> <section> <img src="/screenshots/Select custom windows integration.png" alt="Select custom windows integration" height="370"> </section>
+<p align="center">
+<img src="/screenshots/click integration.png" alt="Click integrations" height="370"> 
+<img src="/screenshots/Select custom windows integration.png" alt="Select custom windows integration" height="370">
+</p>
 
 ### 8.8 Configuring Sysmon Event Channel
 
@@ -775,7 +841,12 @@ High-value Defender event IDs added:
 - 1117 – Malware remediation
 - 50001 – Real-time protection disabled 🚨
 
-<section> <img src="/screenshots/windows defender log integration conf 1.png" height="370"> <br> <img src="/screenshots/windows defender log integration conf 2.png" height="370"> <br> <img src="/screenshots/windows defender log integration conf 3.png" height="370"> </section> <section> <img src="/screenshots/windows defender log integration added.png" height="370"> </section>
+<p align="center"> 
+<img src="/screenshots/windows defender log integration conf 1.png" height="370"> 
+<img src="/screenshots/windows defender log integration conf 2.png" height="370"> 
+<img src="/screenshots/windows defender log integration conf 3.png" height="370">  
+<img src="/screenshots/windows defender log integration added.png" height="370"> 
+</p>
 
 ### 8.10 Restarting Elastic Agent on Windows
 
@@ -864,7 +935,13 @@ Steps performed in Kibana:
 - Opened Agent Policies
 - Created a new policy named linux-policy
 
-<section> <img src="/screenshots/select fleet.png" alt="Select Fleet" height="370"> </section> <section> <img src="/screenshots/Screenshot 2025-12-09 012916.png" alt="Create Agent Policy" height="370"> </section> <section> <img src="/screenshots/create new agent policy.png" alt="Linux Policy Created" height="370"> </section> <section> <img src="/screenshots/policy conf 1.png" alt="Linux Policy Configuration" height="370"> </section> <section> <img src="/screenshots/go in policy.png" alt="Open Linux Policy" height="370"> </section>
+<p align="center">
+<img src="/screenshots/select fleet.png" alt="Select Fleet" height="370"> 
+<img src="/screenshots/Screenshot 2025-12-09 012916.png" alt="Create Agent Policy" height="370"> 
+<img src="/screenshots/create new agent policy.png" alt="Linux Policy Created" height="370">  
+<img src="/screenshots/policy conf 1.png" alt="Linux Policy Configuration" height="370"> 
+<img src="/screenshots/go in policy.png" alt="Open Linux Policy" height="370">
+ </p>
 
 ### 9.6 Enabling System Integration for Linux Logs
 
@@ -885,7 +962,11 @@ Configuration selected:
 - Agent Policy: linux-policy
 - Enrollment method: Enroll in Fleet
 
-<section> <img src="/screenshots/add agent.png" alt="Add Agent" height="370"> </section> <section> <img src="/screenshots/add agent conf 1.png" alt="Add Agent Configuration" height="370"> </section> <section> <img src="/screenshots/add agent conf 2.png" alt="Linux Install Command" height="370"> </section>
+<p align="center">
+<img src="/screenshots/add agent.png" alt="Add Agent" height="370"> 
+<img src="/screenshots/add agent conf 1.png" alt="Add Agent Configuration" height="370"> 
+<img src="/screenshots/add agent conf 2.png" alt="Linux Install Command" height="370"> 
+</p>
 
 The command was executed on the Linux SSH server.
 
@@ -979,7 +1060,10 @@ Steps performed:
 - Clicked Alerts
 - Selected Create search threshold rule
 
-<section> <img src="/screenshots/create alert.png" alt="Create Alert" height="370"> </section> <section> <img src="/screenshots/create threshold rule.png" alt="Create Threshold Rule" height="370"> </section>
+<p align="center"> 
+<img src="/screenshots/create alert.png" alt="Create Alert" height="370"> 
+<img src="/screenshots/create threshold rule.png" alt="Create Threshold Rule" height="370"> 
+</p>
 
 ### 10.5 Configuring the SSH Brute-Force Rule
 
@@ -988,7 +1072,10 @@ Rule configuration:
 - Condition: Failed events greater than threshold
 - Rule name: ssh brute force activity
 
-<section> <img src="/screenshots/create rule conf 1.png" height="370"> </section> <section> <img src="/screenshots/create rule conf 2.png" height="370"> </section>
+<p align="center"> 
+<img src="/screenshots/create rule conf 1.png" height="370">
+<img src="/screenshots/create rule conf 2.png" height="370"> 
+</p>
 
 Once enabled, the rule continuously monitors SSH failures 🚨.
 
@@ -1002,7 +1089,10 @@ Filters used:
     system.auth.ssh.event : failed  
     AND agent.name : "linux-ssh-server"
 
-<section> <img src="/screenshots/create map - 1 for ssh failed activity.png" alt="Create SSH Failed Map Step 1" height="370"> </section> <section> <img src="/screenshots/create map - 2 for ssh failed activity.png" alt="Create SSH Failed Map Step 2" height="370"> </section>
+<p align="center">
+<img src="/screenshots/create map - 1 for ssh failed activity.png" alt="Create SSH Failed Map Step 1" height="370"> 
+<img src="/screenshots/create map - 2 for ssh failed activity.png" alt="Create SSH Failed Map Step 2" height="370"> 
+</p>
 
 ### 10.7 Configuring Map Layer Settings
 
@@ -1110,7 +1200,12 @@ Rule configuration applied:
 - Rule schedule: Every 1 minute
 - Rule name: RDP Brute Force Activity
 
-<section> <img src="/screenshots/Create Rule Conf - 1.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 2.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 3.png" height="370"> </section> <section> <img src="/screenshots/Create Rule Conf - 4.png" height="370"> </section>
+<p align="center">
+<img src="/screenshots/Create Rule Conf - 1.png" height="370"> 
+<img src="/screenshots/Create Rule Conf - 2.png" height="370">
+<img src="/screenshots/Create Rule Conf - 3.png" height="370"> 
+<img src="/screenshots/Create Rule Conf - 4.png" height="370">
+ </p>
 
 ### 11.5 Enabling and Verifying the RDP Alert Rule
 
@@ -1134,7 +1229,11 @@ Steps performed:
 - Clicked Create new rule
 - Selected Threshold rule
 
-<section> <img src="/screenshots/create rule.png" height="370"> </section> <section> <img src="/screenshots/select create new rules.png" height="370"> </section> <section> <img src="/screenshots/Select threshold.png" height="370"> </section>
+<p align="center">
+<img src="/screenshots/create rule.png" height="370">
+<img src="/screenshots/select create new rules.png" height="370"> 
+<img src="/screenshots/Select threshold.png" height="370"> 
+</p>
 
 ### 11.7 Configuring Advanced RDP Rule Logic
 
@@ -1147,7 +1246,10 @@ Grouping fields:
 - source.ip
 - user.name
 
-<section> <img src="/screenshots/for rdp rule.png" height="370"> </section> <section> <img src="/screenshots/for rdp rule 2.png" height="370"> </section>
+<p align="center">
+<img src="/screenshots/for rdp rule.png" height="370">
+<img src="/screenshots/for rdp rule 2.png" height="370">
+</p> 
 
 This rule provides:
 - attacker IP attribution
@@ -1397,7 +1499,10 @@ Command executed:
 
 The initial make command failed because the Docker daemon was not running.
 
-<img src="/screenshots/we get error , after typing command make.png" width="650"> <img src="/screenshots/Reason for make to fail.png" width="650">
+<p align="center"> 
+<img src="/screenshots/we get error , after typing command make.png" width="650"> 
+<img src="/screenshots/Reason for make to fail.png" width="650">
+</p>
 
 Fix applied:
 
@@ -1437,7 +1542,12 @@ Rules applied:
   - Windows Server public IP
   - Linux SSH server public IP
 
-<img src="/screenshots/create firewall for mythic.png" width="650"> <img src="/screenshots/my public ip address.png" width="650"> <img src="/screenshots/Mythic firewall conf.png" width="650"> <img src="/screenshots/Firewall updated.png" width="650">
+<p align="center">
+<img src="/screenshots/create firewall for mythic.png" width="650"> 
+<img src="/screenshots/my public ip address.png" width="650"> 
+<img src="/screenshots/Mythic firewall conf.png" width="650"> 
+<img src="/screenshots/Firewall updated.png" width="650">
+</p>
 
 This ensured the C2 server was not publicly exposed 🌐🚫.
 
@@ -1452,7 +1562,12 @@ URL format:
 
 Default credentials were retrieved from the .env file.
 
-<img src="/screenshots/mythic login.png" width="650"> <img src="/screenshots/find password - 1.png" width="650"> <img src="/screenshots/find password - 2.png" width="650"> <img src="/screenshots/find password - 3.png" width="650">
+<p align="center">
+<img src="/screenshots/mythic login.png" width="650"> 
+<img src="/screenshots/find password - 1.png" width="650"> 
+<img src="/screenshots/find password - 2.png" width="650"> 
+<img src="/screenshots/find password - 3.png" width="650">
+ </p>
 
 ### 14.10 Mythic Dashboard Verification
 
@@ -1491,7 +1606,11 @@ Steps performed:
 - Opened the reduced wordlist
 - Appended the valid password manually
 
-<section> <img src="/screenshots/attack from kali - 1.png" width="610"> </section> <section> <img src="/screenshots/attack from kali - 2.png" width="610"> </section> <section> <img src="/screenshots/attack from kali - 3.png" width="610"> </section>
+<p align="center">
+<img src="/screenshots/attack from kali - 1.png" width="610"> 
+<img src="/screenshots/attack from kali - 2.png" width="610"> 
+<img src="/screenshots/attack from kali - 3.png" width="610">
+</p>
 
 ### 15.3 Executing RDP Brute-Force Attack
 
@@ -1529,19 +1648,31 @@ Microsoft Defender real-time protection was intentionally disabled to simulate a
 
 On the Mythic server, the Apollo agent was installed and made available.
 
-<section> <img src="/screenshots/Installing apollo on mythic server.png" width="610"> </section> <section> <img src="/screenshots/apollo agent visible on mythic gui.png" width="610"> </section>
+<p align="center">
+<img src="/screenshots/Installing apollo on mythic server.png" width="610"> 
+<img src="/screenshots/apollo agent visible on mythic gui.png" width="610"> 
+</p>
 
 ### 15.8 Installing HTTP C2 Profile
 
 The HTTP C2 profile was installed and enabled.
 
-<section> <img src="/screenshots/install mythic http profile.png" width="610"> </section> <section> <img src="/screenshots/http profile visible on mythic gui.png" width="610"> </section>
+<p align="center">
+<img src="/screenshots/install mythic http profile.png" width="610"> 
+<img src="/screenshots/http profile visible on mythic gui.png" width="610"> 
+</p>
 
 ### 15.9 Building the Mythic Payload
 
 A Windows executable payload was created using Apollo with the HTTP C2 profile.
 
-<section> <img src="/screenshots/mythic-payload-creation-1.png" width="610"> </section> <section> <img src="/screenshots/mythic-payload-creation-2.png" width="610"> </section> <section> <img src="/screenshots/mythic-payload-creation-3.png" width="610"> </section> <section> <img src="/screenshots/mythic-payload-creation-4.png" width="610"> </section> <section> <img src="/screenshots/mythic-payload-creation-5.png" width="610"> </section>
+<p align="center">
+<img src="/screenshots/mythic-payload-creation-1.png" width="610"> 
+<img src="/screenshots/mythic-payload-creation-2.png" width="610"> 
+<img src="/screenshots/mythic-payload-creation-3.png" width="610"> 
+<img src="/screenshots/mythic-payload-creation-4.png" width="610"> 
+<img src="/screenshots/mythic-payload-creation-5.png" width="610">
+</p>
 
 Payload download link was copied.
 
@@ -1551,7 +1682,11 @@ Payload download link was copied.
 
 The payload was downloaded, renamed, and hosted using a Python HTTP server.
 
-<section> <img src="/screenshots/run wget command for the payload.png" width="610"> </section> <section> <img src="/screenshots/payload operations.png" width="610"> </section> <section> <img src="/screenshots/Started python server on port 9999 from mythic server.png" width="610"> </section>
+<p align="center">
+<img src="/screenshots/run wget command for the payload.png" width="610"> 
+<img src="/screenshots/payload operations.png" width="610"> 
+<img src="/screenshots/Started python server on port 9999 from mythic server.png" width="610"> 
+</p>
 
 ### 15.11 Executing Payload on Windows Server
 
@@ -1639,7 +1774,11 @@ Rule query used:
 
 Rule configuration screens:
 
-<section> <img src="/screenshots/rule configuration - 1.png" width="720"> </section> <section> <img src="/screenshots/rule configuration - 2.png" width="720"> </section> <section> <img src="/screenshots/rule configuration - 3.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/rule configuration - 1.png" width="720"> 
+<img src="/screenshots/rule configuration - 2.png" width="720"> 
+<img src="/screenshots/rule configuration - 3.png" width="720"> 
+</p>
 
 Rule details:
 - Rule name: mythic-c2-apollo-agent-detected
@@ -1722,7 +1861,10 @@ The server was accessed via Remote Desktop.
 OS Ticket requires a web server, PHP, and a database backend.  
 XAMPP was installed to provide all required services.
 
-<section> <img src="/screenshots/download xampp.png" width="720"> </section> <section> <img src="/screenshots/xampp install.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/download xampp.png" width="720"> 
+<img src="/screenshots/xampp install.png" width="720"> </section>
+</p>
 
 ### 17.3 Modifying XAMPP Configuration Files
 
@@ -1742,7 +1884,13 @@ Database configuration changes were applied.
 
 Inbound firewall rules were created to allow HTTP and HTTPS traffic.
 
-<section> <img src="/screenshots/create a new inbound rule.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 1.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 2.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 3.png" width="720"> </section> <section> <img src="/screenshots/new rule conf - 4.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/create a new inbound rule.png" width="720"> 
+<img src="/screenshots/new rule conf - 1.png" width="720"> 
+<img src="/screenshots/new rule conf - 2.png" width="720"> 
+<img src="/screenshots/new rule conf - 3.png" width="720"> 
+<img src="/screenshots/new rule conf - 4.png" width="720"> 
+</p>
 
 ### 17.5 Starting Apache & MySQL Services
 
@@ -1752,7 +1900,10 @@ Services were started from the XAMPP control panel.
 
 The phpMyAdmin interface was opened.
 
-<section> <img src="/screenshots/click admin.png" width="720"> </section> <section> <img src="/screenshots/click phpmyadmin.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/click admin.png" width="720"> 
+<img src="/screenshots/click phpmyadmin.png" width="720"> </section>
+</p>
 
 ### 17.6 Fixing phpMyAdmin Database Errors
 
@@ -1762,7 +1913,15 @@ Initial access to phpMyAdmin resulted in errors.
 
 Several configuration and privilege fixes were applied.
 
-<section> <img src="/screenshots/configuration changes.png" width="720"> </section> <section> <img src="/screenshots/click on root with localhost.png" width="720"> </section> <section> <img src="/screenshots/made changes in login information.png" width="720"> </section> <section> <img src="/screenshots/now make changes in config.inc.png" width="720"> </section> <section> <img src="/screenshots/now for pma account.png" width="720"> </section> <section> <img src="/screenshots/edit priveledges of pma.png" width="720"> </section> <section> <img src="/screenshots/change the pma config in config.inc.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/configuration changes.png" width="720"> 
+<img src="/screenshots/click on root with localhost.png" width="720"> 
+<img src="/screenshots/made changes in login information.png" width="720"> 
+<img src="/screenshots/now make changes in config.inc.png" width="720"> 
+<img src="/screenshots/now for pma account.png" width="720"> 
+<img src="/screenshots/edit priveledges of pma.png" width="720"> 
+<img src="/screenshots/change the pma config in config.inc.png" width="720">
+</p>
 
 After these changes, phpMyAdmin became fully accessible.
 
@@ -1770,7 +1929,11 @@ After these changes, phpMyAdmin became fully accessible.
 
 OS Ticket was downloaded and the installer was launched.
 
-<section> <img src="/screenshots/install osticket.png" width="720"> </section> <section> <img src="/screenshots/choose osticket version.png" width="720"> </section> <section> <img src="/screenshots/os ticket installer page.png" width="720"> </section>
+<p align="center"> 
+<img src="/screenshots/install osticket.png" width="720"> 
+<img src="/screenshots/choose osticket version.png" width="720"> 
+<img src="/screenshots/os ticket installer page.png" width="720"> 
+</p>
 
 ### 17.8 Resolving OS Ticket Installation Issues
 
@@ -1780,7 +1943,12 @@ The initial installation attempt failed due to missing configuration.
 
 Required configuration changes were applied.
 
-<section> <img src="/screenshots/made changes to ost-sampleconfig.png" width="720"> </section> <section> <img src="/screenshots/click on home icon.png" width="720"> </section> <section> <img src="/screenshots/check all boxex.png" width="720"> </section> <section> <img src="/screenshots/did some reset.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/made changes to ost-sampleconfig.png" width="720"> 
+<img src="/screenshots/click on home icon.png" width="720"> 
+<img src="/screenshots/check all boxex.png" width="720"> 
+<img src="/screenshots/did some reset.png" width="720"> 
+</p>
 
 After correction, the installer completed successfully.
 
@@ -1813,7 +1981,10 @@ Steps performed:
 - Created a new API key
 - Allowed access from the Elastic server’s private IP
 
-<section> <img src="/screenshots/add new api key in osticket.png" width="720"> </section> <section> <img src="/screenshots/add key.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/add new api key in osticket.png" width="720"> 
+<img src="/screenshots/add key.png" width="720"> 
+</p>
 
 ### 18.2 Enabling Elastic Connector Support
 
@@ -1824,7 +1995,10 @@ Steps performed:
 - Navigated to License Management
 - Activated the 30-day trial
 
-<section> <img src="/screenshots/open stack management.png" width="720"> </section> <section> <img src="/screenshots/click manage 30 day licence.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/open stack management.png" width="720"> 
+<img src="/screenshots/click manage 30 day licence.png" width="720"> 
+</p>
 
 ### 18.3 Creating a Webhook Connector in Elastic
 
@@ -1848,7 +2022,10 @@ Connector configuration:
 
 - Payload format: XML
 
-<section> <img src="/screenshots/go to connector.png" width="720"> </section> <section> <img src="/screenshots/webhook connector conf.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/go to connector.png" width="720"> 
+<img src="/screenshots/webhook connector conf.png" width="720"> 
+</p>
 
 ### 18.4 Resolving Network Connectivity Issue
 
@@ -1858,7 +2035,10 @@ Steps performed:
 - Checked network adapter IP on OS Ticket server
 - Updated configuration to use the correct private VPC IP
 
-<section> <img src="/screenshots/ipconfig on osticket server.png" width="720"> </section> <section> <img src="/screenshots/wrong ip problem solved.png" width="720"> </section>
+<p align="center">
+<img src="/screenshots/ipconfig on osticket server.png" width="720"> 
+<img src="/screenshots/wrong ip problem solved.png" width="720"> 
+</p>
 
 ### 18.5 Validating Webhook Connectivity
 
@@ -1905,7 +2085,10 @@ Steps performed:
 - Selected the SSH brute-force alert
 - Reviewed alert metadata
 
-<img src="/screenshots/open alerts under security.png" width="750" height="420"> <img src="/screenshots/investigation - 1.png" width="750" height="420">
+<p align="center">
+<img src="/screenshots/open alerts under security.png" width="750" height="420"> 
+<img src="/screenshots/investigation - 1.png" width="750" height="420">
+</p>
 
 This view provides:
 - rule name
@@ -1922,7 +2105,10 @@ Steps performed:
 - Logged into OS Ticket
 - Opened the newly created ticket
 
-<img src="/screenshots/ticket generated.png" width="750" height="420"> <img src="/screenshots/ticket info.png" width="750" height="420">
+<p align="center">
+<img src="/screenshots/ticket generated.png" width="750" height="420"> 
+<img src="/screenshots/ticket info.png" width="750" height="420">
+</p>
 
 The ticket contained:
 - alert title
@@ -1950,7 +2136,10 @@ Steps performed:
 - Reviewed surrounding authentication events
 - Checked if any login was successful
 
-<img src="/screenshots/investigation - 2.png" width="750" height="420"> <img src="/screenshots/investigation - 3.png" width="750" height="420">
+<p align="center">
+<img src="/screenshots/investigation - 2.png" width="750" height="420"> 
+<img src="/screenshots/investigation - 3.png" width="750" height="420">
+</p>
 
 ### 19.5 Validating Attacker Source and Behavior
 
@@ -1997,7 +2186,10 @@ Steps performed:
 
 After confirming no further malicious activity, the ticket was closed.
 
-<img src="/screenshots/ticket status.png" width="750" height="420"> <img src="/screenshots/closed tickets.png" width="750" height="420">
+<p align="center">
+<img src="/screenshots/ticket status.png" width="750" height="420"> 
+<img src="/screenshots/closed tickets.png" width="750" height="420">
+</p>
 
 This completes the SOC workflow:
 
