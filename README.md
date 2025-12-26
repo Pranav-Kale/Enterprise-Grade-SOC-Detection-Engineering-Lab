@@ -76,32 +76,32 @@ This approach ensures that the SOC is not theoretical, but operationally realist
 
 ### Architecture Mindset
 
-This SOC is designed with a visibility-first mindset 🔍.  
+This SOC is designed with a visibility-first mindset 🔍.    
 Instead of starting with alerts or dashboards, the architecture focuses on how telemetry flows from endpoints to detections and finally into response workflows 🧱.
 
 Each component has a defined role, forming a layered SOC pipeline rather than isolated tools.
 
 ### Zero Trust Foundation
 
-All SOC components operate behind a Zero Trust access model 🔐.  
+All SOC components operate behind a Zero Trust access model 🔐.    
 No services are publicly exposed, and access is granted only through identity-based authentication, ensuring the SOC itself does not become an attack surface 🛡️.
 
 ### Telemetry-Driven Design
 
-Detections in this SOC are powered by high-fidelity telemetry 📊.  
+Detections in this SOC are powered by high-fidelity telemetry 📊.    
 Windows and Linux endpoints generate authentication, process, network, and security logs that are centrally collected and correlated for analysis 🧠.
 
 ### Detection Engineering Focus
 
-Detections are intentionally engineered to represent real attacker behavior 🎯.  
+Detections are intentionally engineered to represent real attacker behavior 🎯.    
 Brute-force attempts, unauthorized access, execution activity, network callbacks, and defense evasion are all monitored and validated ⚔️.
 
 ### Closed-Loop SOC Workflow
 
 The architecture enforces a complete SOC lifecycle 🔁.
 
-  
-  Telemetry → Detection → Alert → Ticket → Investigation → Resolution
+   
+   Telemetry → Detection → Alert → Ticket → Investigation → Resolution
 
 Alerts are treated as investigation starting points, with full documentation and auditability 📑.
 
@@ -112,7 +112,7 @@ Alerts are treated as investigation starting points, with full documentation and
 
 ### Overall Architecture Overview
 
-The SOC environment is built as a private, cloud-based security infrastructure where all components communicate internally over a controlled network 🧱.  
+The SOC environment is built as a private, cloud-based security infrastructure where all components communicate internally over a controlled network 🧱.    
 No core security services are exposed directly to the public internet, ensuring isolation and reduced attack surface 🔒.
 
 The architecture separates:
@@ -124,34 +124,34 @@ The architecture separates:
 
 Access to the SOC follows an identity-driven path 🔐.
 
-  
-  Analyst → Zero Trust Access → Private Network → SOC Services
+   
+   Analyst → Zero Trust Access → Private Network → SOC Services
 
-Endpoints send telemetry inward, while analysts access dashboards and alerts only after authentication 🛡️.  
+Endpoints send telemetry inward, while analysts access dashboards and alerts only after authentication 🛡️.    
 This mirrors enterprise SOC access patterns where visibility is private and controlled.
 
 ### Telemetry & Detection Flow
 
 Security data flows through the SOC in a structured pipeline 📊.
 
-  
-  Endpoints → Agents → SIEM → Detections → Alerts
+   
+   Endpoints → Agents → SIEM → Detections → Alerts
 
-Telemetry from Windows and Linux systems is centralized, correlated, and evaluated against engineered detection rules 🧠.  
+Telemetry from Windows and Linux systems is centralized, correlated, and evaluated against engineered detection rules 🧠.    
 This ensures detections are based on behavior, not isolated events.
 
 ### Response & Case Management Flow
 
 Once an alert is triggered, it enters the response layer 🔁.
 
-  
-  Alert → Ticket → Investigation → Resolution
+   
+   Alert → Ticket → Investigation → Resolution
 
 Alerts are automatically converted into tickets, enabling documentation, analyst ownership, and audit-ready incident tracking 📑.
 
 ### Adversary Interaction Boundary
 
-Attacker-controlled infrastructure operates outside the SOC boundary 🧨.  
+Attacker-controlled infrastructure operates outside the SOC boundary 🧨.    
 Any interaction with internal systems is intentional and monitored, allowing detections to be validated against real attack behavior 🎯.
 
 
@@ -159,15 +159,15 @@ Any interaction with internal systems is intentional and monitored, allowing det
 ---
 ## 4. Secure Private Access & Zero Trust Foundation
 
-This section documents the initial foundation setup of the SOC environment.  
+This section documents the initial foundation setup of the SOC environment.    
 All later components (Elastic, endpoints, OS Ticket, detections) rely on this layer for secure private access.
 
 ### 4.1 Creating the Vultr VPC Network
 
 A dedicated private network was created to host all SOC infrastructure.
 
-  
-  VPC CIDR: 10.0.0.0/24
+   
+   VPC CIDR: 10.0.0.0/24
 
 Steps performed:
 - Navigated to Vultr → Network → VPC
@@ -275,7 +275,7 @@ Only SOC VPC traffic was routed through WARP.
 ---
 ## 5. Core SIEM Deployment – Elastic Stack (Elasticsearch & Kibana)
 
-This section documents the deployment and configuration of the Elastic Stack inside the SOC private network.  
+This section documents the deployment and configuration of the Elastic Stack inside the SOC private network.    
 Elasticsearch acts as the central data store, while Kibana provides visibility, analysis, and detection management.
 
 ### 5.1 Deploying the Elasticsearch Server
@@ -301,9 +301,9 @@ System packages were updated to ensure stability and compatibility.
 
 Commands executed:
 
-  
-   apt-get update  
-   apt-get upgrade -y
+   
+    apt-get update    
+    apt-get upgrade -y
 
 <img src="/screenshots/initial command on elk server.png" width="700" height="420">
 
@@ -337,9 +337,9 @@ The Elasticsearch configuration file was modified to bind only to the private VP
 
 Configuration applied:
 
-  
-   network.host: 10.0.0.4  
-   http.port: 9200
+   
+    network.host: 10.0.0.4    
+    http.port: 9200
 
 ### 5.8 Starting and Verifying Elasticsearch Service
 
@@ -371,9 +371,9 @@ Kibana configuration file was edited to define host and port.
 
 Initial configuration:
 
-  
-   server.port: 5601  
-   server.host: 10.0.0.4
+   
+    server.port: 5601    
+    server.host: 10.0.0.4
 
 ### 5.12 Starting Kibana Service
 
@@ -445,7 +445,7 @@ After restart, errors were resolved.
 ---
 ## 6. Endpoint Infrastructure Setup (Windows & Linux Targets)
 
-This section documents the deployment of endpoint systems that later act as attack targets and telemetry sources within the SOC.  
+This section documents the deployment of endpoint systems that later act as attack targets and telemetry sources within the SOC.    
 At this stage, no detections or agents are installed — the focus is strictly on infrastructure preparation.
 
 ### 6.1 Windows Server Deployment (Target Endpoint)
@@ -501,8 +501,8 @@ After leaving the server exposed for some time, failed login attempts began appe
 
 To filter failed authentication attempts:
 
-  
-   grep -i failed auth.log | grep -i root
+   
+    grep -i failed auth.log | grep -i root
 
 <img src="/screenshots/We can see logs of failed authentication.png" height="370">
 
@@ -519,7 +519,7 @@ This confirmed that the Linux server was already receiving real attacker traffic
 ---
 ## 7. Fleet Server Setup & Elastic Agent Enrollment
 
-This section documents the deployment of the Fleet Server and the onboarding of the Windows endpoint into the Elastic Stack.  
+This section documents the deployment of the Fleet Server and the onboarding of the Windows endpoint into the Elastic Stack.    
 Fleet Server enables centralized agent management, policy enforcement, and telemetry control across all endpoints 🧠.
 
 ### 7.1 Accessing Fleet in Kibana
@@ -545,8 +545,8 @@ The Quick Start option was selected for Fleet Server setup.
 
 Configuration details:
 - Fleet Server Name: fleet-server
-- Fleet Server URL:  
-   https://<FLEET_SERVER_PUBLIC_IP>:8220
+- Fleet Server URL:    
+    https://<FLEET_SERVER_PUBLIC_IP>:8220
 
 <img src="/screenshots/kibana fleet sdd conf 1.png" width="700" height="420">
 
@@ -602,8 +602,8 @@ A dedicated agent policy was created for the Windows Server.
 
 Policy name:
 
-  
-   windows-policy
+   
+    windows-policy
 
 <img src="/screenshots/policy name.png" width="700" height="420">
 
@@ -631,9 +631,9 @@ To fix this, the --insecure flag was added.
 
 Final command format:
 
-  
-   .\elastic-agent.exe install --url=https://<FLEET_SERVER_IP>:8220 \
-   --enrollment-token=<TOKEN> --insecure
+   
+    .\elastic-agent.exe install --url=https://<FLEET_SERVER_IP>:8220 \
+    --enrollment-token=<TOKEN> --insecure
 
 ### 7.15 Elastic Agent Enrollment Successful
 
@@ -664,7 +664,7 @@ This confirmed:
 ---
 ## 8. Windows Endpoint Telemetry Engineering (Sysmon & Defender Logs)
 
-This section documents how high-fidelity Windows telemetry was enabled on the Windows Server endpoint.  
+This section documents how high-fidelity Windows telemetry was enabled on the Windows Server endpoint.    
 The focus here is on process, network, and security visibility, which is essential for detection engineering 🧠.
 
 ### 8.1 Downloading Sysmon on Windows Server
@@ -698,8 +698,8 @@ Sysmon was installed using Olaf’s configuration file.
 
 Command executed:
 
-  
-   .\Sysmon64.exe -i SysmonConfig.xml
+   
+    .\Sysmon64.exe -i SysmonConfig.xml
 
 The license agreement was accepted during installation.
 
@@ -721,12 +721,12 @@ Sysmon logs were confirmed in Event Viewer.
 
 Navigation path:
 
-  
-   Applications and Services Logs  
-   → Microsoft  
-   → Windows  
-   → Sysmon  
-   → Operational
+   
+    Applications and Services Logs    
+    → Microsoft    
+    → Windows    
+    → Sysmon    
+    → Operational
 
 <section> <img src="/screenshots/Sysmon in event viewer.png" alt="Sysmon logs in Event Viewer" height="350"> </section>
 
@@ -749,8 +749,8 @@ Steps performed:
 
 Sysmon logs were configured using the following channel:
 
-  
-   Microsoft-Windows-Sysmon/Operational
+   
+    Microsoft-Windows-Sysmon/Operational
 
 <section> <img src="/screenshots/windows log integration conf 1.png" height="370"> <br> <img src="/screenshots/windows log integration conf 2.png" height="370"> </section>
 
@@ -766,8 +766,8 @@ The Defender Operational log channel was identified via Event Viewer.
 
 Configured channel:
 
-  
-   Microsoft-Windows-Windows Defender/Operational
+   
+    Microsoft-Windows-Windows Defender/Operational
 
 High-value Defender event IDs added:
 - 1116 – Malware detected
@@ -828,8 +828,8 @@ Once connected, the system log directory was accessed.
 
 The SSH authentication log file was identified at:
 
-  
-   /var/log/auth.log
+   
+    /var/log/auth.log
 
 This file records:
 - failed SSH login attempts
@@ -842,8 +842,8 @@ After leaving the SSH service exposed for some time, automated brute-force attem
 
 To filter failed authentication attempts targeting the root account:
 
-  
-   grep -i failed auth.log | grep -i root
+   
+    grep -i failed auth.log | grep -i root
 
 <section> <img src="/screenshots/We can see logs of failed authentication.png" alt="SSH Failed Authentication Logs" height="370"> </section>
 
@@ -949,8 +949,8 @@ Fields added:
 
 To isolate brute-force behavior, the following filter was applied:
 
-  
-   system.auth.ssh.event : failed
+   
+    system.auth.ssh.event : failed
 
 <section> <img src="/screenshots/SSH failed activity on linux.png" alt="SSH Failed Authentication Activity" height="370"> </section>
 
@@ -965,8 +965,8 @@ The filtered query was saved for reuse in alerts and dashboards.
 
 Saved search name:
 
-  
-   SSH Failed Activity
+   
+    SSH Failed Activity
 
 This saved query acts as the base dataset for detection logic.
 
@@ -997,9 +997,9 @@ To visualize attacker origin, a map visualization was created.
 
 Filters used:
 
-  
-   system.auth.ssh.event : failed  
-   AND agent.name : "linux-ssh-server"
+   
+    system.auth.ssh.event : failed    
+    AND agent.name : "linux-ssh-server"
 
 <section> <img src="/screenshots/create map - 1 for ssh failed activity.png" alt="Create SSH Failed Map Step 1" height="370"> </section> <section> <img src="/screenshots/create map - 2 for ssh failed activity.png" alt="Create SSH Failed Map Step 2" height="370"> </section>
 
@@ -1015,8 +1015,8 @@ Join field | source.geo.country_iso_code
 
 The map was saved with the title:
 
-  
-   ssh failed activity network map
+   
+    ssh failed activity network map
 
 <section> <img src="/screenshots/save the map.png" alt="Save SSH Map" height="370"> </section>
 
@@ -1028,8 +1028,8 @@ A new dashboard was created to centralize SSH authentication activity.
 
 The dashboard was saved as:
 
-  
-   authentication-activity
+   
+    authentication-activity
 
 <section> <img src="/screenshots/save new dashboard.png" alt="Save Dashboard" height="370"> </section>
 
@@ -1039,8 +1039,8 @@ A second visualization was created to track successful SSH logins.
 
 Filter used:
 
-  
-   system.auth.ssh.event : accepted
+   
+    system.auth.ssh.event : accepted
 
 <section> <img src="/screenshots/baic dashboard created for ssh auth.png" alt="Successful SSH Dashboard" height="370"> </section>
 
@@ -1066,8 +1066,8 @@ Steps performed:
 - Filtered logs for the Windows Server agent
 - Applied the following filter to identify failed logon attempts:
 
-  
-   event.code : 4625
+   
+    event.code : 4625
 
 <section> <img src="/screenshots/RDP Failed Activity.png" alt="RDP Failed Authentication Logs" height="370"> </section>
 
@@ -1084,8 +1084,8 @@ The filtered query was saved for reuse.
 
 Saved search name:
 
-  
-   RDP Failed Activity
+   
+    RDP Failed Activity
 
 This saved search acts as the base dataset for all RDP brute-force detections.
 
@@ -1117,8 +1117,8 @@ After enabling the rule, alerts were verified in the Security module.
 
 Navigation:
 
-  
-   Security → Alerts
+   
+    Security → Alerts
 
 <section> <img src="/screenshots/Alert in stack management .png" height="370"> </section> <section> <img src="/screenshots/We will see alerts here.png" height="370"> </section>
 
@@ -1139,8 +1139,8 @@ Steps performed:
 
 Rule logic applied:
 
-  
-   event.code : 4625 AND user.name : administrator
+   
+    event.code : 4625 AND user.name : administrator
 
 Grouping fields:
 - source.ip
@@ -1176,8 +1176,8 @@ A geographic visualization was created to track failed RDP authentication attemp
 
 Filter used:
 
-  
-   event.code : 4625 AND agent.name : <windows-server-name>
+   
+    event.code : 4625 AND agent.name : <windows-server-name>
 
 A choropleth map layer was added.
 
@@ -1190,8 +1190,8 @@ Map configuration:
 
 The map was saved as:
 
-  
-   RDP Failed Authentication
+   
+    RDP Failed Authentication
 
 <section> <img src="/screenshots/Save map.png" alt="Save RDP Failed Map" width="650"> </section>
 
@@ -1201,9 +1201,9 @@ To visualize successful RDP logins, a second map was created.
 
 Filter used:
 
-  
-   event.code : 4624 AND  
-   (winlog.event_data.logon_type : 10 OR winlog.event_data.logon_type : 7)
+   
+    event.code : 4624 AND    
+    (winlog.event_data.logon_type : 10 OR winlog.event_data.logon_type : 7)
 
 Explanation:
 - Logon Type 10 → Remote Interactive (RDP)
@@ -1260,7 +1260,7 @@ This dashboard acts as the central authentication intelligence view of the SOC.
 ---
 ## 13. Attack Vector Design & Adversary Simulation Planning
 
-This section documents the pre-attack planning phase, where the complete intrusion path against the Windows Server was designed before executing any attack.  
+This section documents the pre-attack planning phase, where the complete intrusion path against the Windows Server was designed before executing any attack.    
 The objective was to ensure that every attacker action would generate observable telemetry and map cleanly to existing detections 🧠⚔️.
 
 ### 13.1 Designing the Attack Flow
@@ -1284,25 +1284,25 @@ This diagram serves as a blueprint for validating SOC visibility and detections.
 
 Each stage of the attack was intentionally mapped to expected telemetry sources:
  
-   
-   RDP brute-force  
-   → Windows Event ID 4625 (failed logon)
+    
+    RDP brute-force    
+    → Windows Event ID 4625 (failed logon)
  
-   
-   Successful RDP login  
-   → Windows Event ID 4624 (logon type 10)
+    
+    Successful RDP login    
+    → Windows Event ID 4624 (logon type 10)
  
-   
-   Command execution  
-   → Sysmon Event ID 1 (process creation)
+    
+    Command execution    
+    → Sysmon Event ID 1 (process creation)
  
-   
-   Network callbacks  
-   → Sysmon Event ID 3 (network connection)
+    
+    Network callbacks    
+    → Sysmon Event ID 3 (network connection)
  
-   
-   Defense evasion  
-   → Microsoft Defender Event ID 50001 🚨
+    
+    Defense evasion    
+    → Microsoft Defender Event ID 50001 🚨
 
 This ensured that detections built earlier would be provably testable, not theoretical.
 
@@ -1356,9 +1356,9 @@ After deployment, the server was accessed via SSH and system packages were updat
 
 Commands executed:
 
-  
-   apt-get update  
-   apt-get upgrade -y
+   
+    apt-get update    
+    apt-get upgrade -y
 
 ### 14.3 Installing Required Dependencies
 
@@ -1376,8 +1376,8 @@ The official Mythic repository was cloned from GitHub.
 
 Command executed:
 
-  
-   git clone https://github.com/its-a-feature/Mythic
+   
+    git clone https://github.com/its-a-feature/Mythic
 
 <img src="/screenshots/clone github mythic repo.png" width="650">
 
@@ -1387,8 +1387,8 @@ Inside the Mythic directory, Docker support scripts were executed.
 
 Command executed:
 
-  
-   ./install_docker_ubuntu.sh
+   
+    ./install_docker_ubuntu.sh
 
 <img src="/screenshots/install docker for ubuntu.png" width="650">
 
@@ -1400,9 +1400,9 @@ The initial make command failed because the Docker daemon was not running.
 
 Fix applied:
 
-  
-   systemctl restart docker  
-   systemctl status docker
+   
+    systemctl restart docker    
+    systemctl status docker
 
 After restarting Docker, the build process succeeded.
 
@@ -1414,8 +1414,8 @@ Mythic services were started using the Mythic CLI.
 
 Command executed:
 
-  
-   ./mythic-cli start
+   
+    ./mythic-cli start
 
 <img src="/screenshots/Write command to run mythic cli.png" width="650">
 
@@ -1432,9 +1432,9 @@ Firewall rules were configured to restrict access to the Mythic server.
 Rules applied:
 - Block all inbound traffic by default
 - Allow access only from:
-   - analyst public IP
-   - Windows Server public IP
-   - Linux SSH server public IP
+    - analyst public IP
+    - Windows Server public IP
+    - Linux SSH server public IP
 
 <img src="/screenshots/create firewall for mythic.png" width="650"> <img src="/screenshots/my public ip address.png" width="650"> <img src="/screenshots/Mythic firewall conf.png" width="650"> <img src="/screenshots/Firewall updated.png" width="650">
 
@@ -1446,8 +1446,8 @@ The Mythic UI was accessed via HTTPS on port 7443.
 
 URL format:
 
-  
-   https://<mythic-server-ip>:7443
+   
+    https://<mythic-server-ip>:7443
 
 Default credentials were retrieved from the .env file.
 
@@ -1472,7 +1472,7 @@ This confirmed the Mythic C2 infrastructure was fully operational and ready for 
 ---
 ## 15. Full Attack Execution – RDP Brute Force, Payload Execution & C2 Callback
 
-This section documents the complete adversary kill-chain execution against the Windows Server — from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.  
+This section documents the complete adversary kill-chain execution against the Windows Server — from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.    
 All actions performed here were intentionally designed to generate telemetry for validation in later detection stages.
 
 ### 15.1 Staging Fake Sensitive Data on Windows Server
@@ -1597,7 +1597,7 @@ This confirmed full post-compromise control of the endpoint 🎯.
 ---
 ## 16. Detecting Mythic C2 Activity & Suspicious Behavior
 
-This section documents how post-compromise activity generated in Section 15 was detected using Sysmon telemetry, custom detection rules, and dashboards.  
+This section documents how post-compromise activity generated in Section 15 was detected using Sysmon telemetry, custom detection rules, and dashboards.    
 The goal here was to validate that real C2 activity leaves observable and actionable security signals 🧠🚨.
 
 ### 16.1 Identifying Payload Execution via Sysmon (Process Creation)
@@ -1623,18 +1623,18 @@ A custom rule was created to detect Apollo agent execution.
 
 Navigation path:
 
-  
-   Security → Rules → Create new rule → Custom query
+   
+    Security → Rules → Create new rule → Custom query
 
 <section> <img src="/screenshots/open rules to create rules.png" width="720"> </section>
 
 Rule query used:
 
-  
-   event.code : 1 AND (  
-     winlog.event_data.original_file_name : apollo.exe OR  
-     winlog.event_data.hashes : *  
-   )
+   
+    event.code : 1 AND (    
+       winlog.event_data.original_file_name : apollo.exe OR    
+       winlog.event_data.hashes : *    
+    )
 
 Rule configuration screens:
 
@@ -1691,8 +1691,8 @@ Dashboard contents:
 
 Dashboard name:
 
-  
-   mydfir - suspicious activity
+   
+    mydfir - suspicious activity
 
 This dashboard provides centralized visibility into post-compromise behavior and C2-like activity 🔎.
 
@@ -1703,7 +1703,7 @@ This dashboard provides centralized visibility into post-compromise behavior and
 ---
 ## 17. Ticketing System Deployment – OS Ticket Setup
 
-This section documents the deployment and configuration of OS Ticket, which acts as the case management and incident tracking system for the SOC.  
+This section documents the deployment and configuration of OS Ticket, which acts as the case management and incident tracking system for the SOC.    
 This system is later integrated with Elastic to automate alert-to-ticket workflows 🧾⚙️.
 
 ### 17.1 Deploying the OS Ticket Server
@@ -1718,7 +1718,7 @@ The server was accessed via Remote Desktop.
 
 ### 17.2 Installing XAMPP (Apache, PHP, MySQL)
 
-OS Ticket requires a web server, PHP, and a database backend.  
+OS Ticket requires a web server, PHP, and a database backend.    
 XAMPP was installed to provide all required services.
 
 <section> <img src="/screenshots/download xampp.png" width="720"> </section> <section> <img src="/screenshots/xampp install.png" width="720"> </section>
@@ -1837,13 +1837,13 @@ Connector configuration:
 - Method: POST
 - URL:
 
-  
-   http://<OS_TICKET_IP>/osticket/upload/api/tickets.xml
+   
+    http://<OS_TICKET_IP>/osticket/upload/api/tickets.xml
 
 - Header:
 
-  
-   X-API-Key: <OS_TICKET_API_KEY>
+   
+    X-API-Key: <OS_TICKET_API_KEY>
 
 - Payload format: XML
 
@@ -1876,8 +1876,8 @@ A test alert generated a ticket inside OS Ticket.
 
 This validated the full pipeline:
 
-  
-   Elastic Alert → Webhook Connector → OS Ticket Ticket
+   
+    Elastic Alert → Webhook Connector → OS Ticket Ticket
 
 The ticket contained:
 - rule name
@@ -1892,7 +1892,7 @@ The ticket contained:
 ---
 ## 19. SOC Analyst Investigation Workflow (Alert → Ticket → Resolution)
 
-This section documents how alerts generated by Elastic are handled by a SOC analyst, investigated using telemetry and dashboards, and finally resolved using OS Ticket 🧠🛡️.  
+This section documents how alerts generated by Elastic are handled by a SOC analyst, investigated using telemetry and dashboards, and finally resolved using OS Ticket 🧠🛡️.    
 The focus here is on operational response, not detection creation.
 
 ### 19.1 Receiving an Alert in Elastic Security
@@ -2000,8 +2000,8 @@ After confirming no further malicious activity, the ticket was closed.
 
 This completes the SOC workflow:
 
-  
-   Detect → Alert → Ticket → Investigate → Document → Close
+   
+    Detect → Alert → Ticket → Investigate → Document → Close
 
 
 
@@ -2012,7 +2012,7 @@ This completes the SOC workflow:
 ---
 ## 20. Final SOC Capabilities & End-to-End Validation
 
-This section documents the final operational state of the SOC after all infrastructure, detections, attack simulations, and response workflows were implemented and validated 🧠🛡️.  
+This section documents the final operational state of the SOC after all infrastructure, detections, attack simulations, and response workflows were implemented and validated 🧠🛡️.    
 At this stage, the SOC is not a setup — it is a functioning security operations environment.
 
 ### 20.1 End-to-End SOC Lifecycle Validation
@@ -2021,15 +2021,15 @@ The SOC was validated using real attack activity and confirmed telemetry flow ac
 
 Validated lifecycle:
 
-  
-   Endpoint Activity  
-   → Telemetry Collection  
-   → Detection Rule Trigger  
-   → Alert Generation  
-   → Ticket Creation  
-   → Analyst Investigation  
-   → Documentation  
-   → Ticket Closure
+   
+    Endpoint Activity    
+    → Telemetry Collection    
+    → Detection Rule Trigger    
+    → Alert Generation    
+    → Ticket Creation    
+    → Analyst Investigation    
+    → Documentation    
+    → Ticket Closure
 
 Each stage was observed live during SSH brute-force, RDP brute-force, and Mythic C2 attack execution 🔁.
 
