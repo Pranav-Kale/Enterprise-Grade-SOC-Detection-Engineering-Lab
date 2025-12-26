@@ -35,16 +35,16 @@ Modern cybersecurity failures rarely happen because security tools are missing. 
 
 The Enterprise Grade SOC & Detection Engineering Lab is a fully integrated SOC environment built to replicate how security operations function inside an enterprise network. This project focuses on how individual security components work together, rather than showcasing tools in isolation 🔗.
 
-The lab reflects real SOC thinking — visibility first, detection second, response always 🚨.
+The lab reflects real SOC thinking   visibility first, detection second, response always 🚨.
 <p align="center">     
 <img src="/SOC_Project_Diagram.png" width="700" height="auto">
 </p>
 
 ### Project Intent & SOC Design Summary
 
-This project validates a real, operational SOC by ingesting live telemetry and detecting actual attacker behavior, not simulated alerts. The environment monitors authentication activity, endpoint compromise behavior, C2-related network traffic, and defense evasion actions—each detection mapped directly to observable attack techniques 🛡️.
+This project validates a real, operational SOC by ingesting live telemetry and detecting actual attacker behavior, not simulated alerts. The environment monitors authentication activity, endpoint compromise behavior, C2-related network traffic, and defense evasion actions each detection mapped directly to observable attack techniques 🛡️.
 
-Built with an enterprise SOC mindset, the lab applies Zero Trust access, centralized Windows/Linux telemetry, attacker-technique-based detections, automated alert escalation, and structured investigation workflows. The focus is actionable security operations—detect, validate, respond, and document—ensuring the SOC is realistic, defensible, and production-ready.
+Built with an enterprise SOC mindset, the lab applies Zero Trust access, centralized Windows/Linux telemetry, attacker-technique-based detections, automated alert escalation, and structured investigation workflows. The focus is actionable security operations detect, validate, respond, and document ensuring the SOC is realistic, defensible, and production-ready.
 
 
 ---
@@ -489,7 +489,7 @@ After restart, errors were resolved.
 ## 6. Endpoint Infrastructure Setup (Windows & Linux Targets)
 
 This section documents the deployment of endpoint systems that later act as attack targets and telemetry sources within the SOC.  
-At this stage, no detections or agents are installed — the focus is strictly on infrastructure preparation.
+At this stage, no detections or agents are installed   the focus is strictly on infrastructure preparation.
 
 ### 6.1 Windows Server Deployment (Target Endpoint)
 
@@ -540,7 +540,7 @@ The file /var/log/auth.log was confirmed as the primary source for:
 
 ### 6.4 Observing Real SSH Brute-Force Activity
 
-After leaving the server exposed for some time, failed login attempts began appearing automatically — a common behavior for publicly reachable SSH services 🌍.
+After leaving the server exposed for some time, failed login attempts began appearing automatically   a common behavior for publicly reachable SSH services 🌍.
 
 To filter failed authentication attempts:
 
@@ -1419,7 +1419,7 @@ Before launching the attack, the following validation goals were defined:
 - confirm post-compromise activity generates alerts
 - confirm detections can be investigated end-to-end 🔁
 
-No attack activity was performed during this stage — only planning and validation alignment.
+No attack activity was performed during this stage   only planning and validation alignment.
 
 ### 13.4 Preparing for Controlled Execution
 
@@ -1593,7 +1593,7 @@ This confirmed the Mythic C2 infrastructure was fully operational and ready for 
 
 ## 15. Full Attack Execution – RDP Brute Force, Payload Execution & C2 Callback
 
-This section documents the complete adversary kill-chain execution against the Windows Server — from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.  
+This section documents the complete adversary kill-chain execution against the Windows Server   from initial access to post-compromise command execution via Mythic C2 ⚔️🧠.  
 All actions performed here were intentionally designed to generate telemetry for validation in later detection stages.
 
 ### 15.1 Staging Fake Sensitive Data on Windows Server
@@ -2221,7 +2221,7 @@ This completes the SOC workflow:
 ## 20. Final SOC Capabilities & End-to-End Validation
 
 This section documents the final operational state of the SOC after all infrastructure, detections, attack simulations, and response workflows were implemented and validated 🧠🛡️.  
-At this stage, the SOC is not a setup — it is a functioning security operations environment.
+At this stage, the SOC is not a setup   it is a functioning security operations environment.
 
 ### 20.1 End-to-End SOC Lifecycle Validation
 
