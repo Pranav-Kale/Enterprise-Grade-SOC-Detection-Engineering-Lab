@@ -244,7 +244,7 @@ Private routing was configured so WARP clients could reach the SOC VPC.
 
 Connectivity tests were performed through the tunnel.
 
-<img src="/screenshots/check ping .png" width="700" height="420"> <img src="/screenshots/ssh to 10.0.0.3 success but to 10.0.0.4 failed.png" width="700" height="420">
+<img src="/screenshots/check ping .png" width="700" height="420"> <img src="/screenshots/ssh to 10.0.0.3 success.png" width="700" height="420">
 
 This validated:
 - WARP routing
@@ -302,8 +302,8 @@ System packages were updated to ensure stability and compatibility.
 Commands executed:
 
   
-  apt-get update  
-  apt-get upgrade -y
+   apt-get update  
+   apt-get upgrade -y
 
 <img src="/screenshots/initial command on elk server.png" width="700" height="420">
 
@@ -338,8 +338,8 @@ The Elasticsearch configuration file was modified to bind only to the private VP
 Configuration applied:
 
   
-  network.host: 10.0.0.4  
-  http.port: 9200
+   network.host: 10.0.0.4  
+   http.port: 9200
 
 ### 5.8 Starting and Verifying Elasticsearch Service
 
@@ -372,8 +372,8 @@ Kibana configuration file was edited to define host and port.
 Initial configuration:
 
   
-  server.port: 5601  
-  server.host: 10.0.0.4
+   server.port: 5601  
+   server.host: 10.0.0.4
 
 ### 5.12 Starting Kibana Service
 
@@ -502,7 +502,7 @@ After leaving the server exposed for some time, failed login attempts began appe
 To filter failed authentication attempts:
 
   
-  grep -i failed auth.log | grep -i root
+   grep -i failed auth.log | grep -i root
 
 <img src="/screenshots/We can see logs of failed authentication.png" height="370">
 
@@ -546,7 +546,7 @@ The Quick Start option was selected for Fleet Server setup.
 Configuration details:
 - Fleet Server Name: fleet-server
 - Fleet Server URL:  
-  https://<FLEET_SERVER_PUBLIC_IP>:8220
+   https://<FLEET_SERVER_PUBLIC_IP>:8220
 
 <img src="/screenshots/kibana fleet sdd conf 1.png" width="700" height="420">
 
@@ -603,7 +603,7 @@ A dedicated agent policy was created for the Windows Server.
 Policy name:
 
   
-  windows-policy
+   windows-policy
 
 <img src="/screenshots/policy name.png" width="700" height="420">
 
@@ -632,8 +632,8 @@ To fix this, the --insecure flag was added.
 Final command format:
 
   
-  .\elastic-agent.exe install --url=https://<FLEET_SERVER_IP>:8220 \
-  --enrollment-token=<TOKEN> --insecure
+   .\elastic-agent.exe install --url=https://<FLEET_SERVER_IP>:8220 \
+   --enrollment-token=<TOKEN> --insecure
 
 ### 7.15 Elastic Agent Enrollment Successful
 
@@ -699,7 +699,7 @@ Sysmon was installed using Olaf’s configuration file.
 Command executed:
 
   
-  .\Sysmon64.exe -i SysmonConfig.xml
+   .\Sysmon64.exe -i SysmonConfig.xml
 
 The license agreement was accepted during installation.
 
@@ -722,11 +722,11 @@ Sysmon logs were confirmed in Event Viewer.
 Navigation path:
 
   
-  Applications and Services Logs  
-  → Microsoft  
-  → Windows  
-  → Sysmon  
-  → Operational
+   Applications and Services Logs  
+   → Microsoft  
+   → Windows  
+   → Sysmon  
+   → Operational
 
 <section> <img src="/screenshots/Sysmon in event viewer.png" alt="Sysmon logs in Event Viewer" height="350"> </section>
 
@@ -750,7 +750,7 @@ Steps performed:
 Sysmon logs were configured using the following channel:
 
   
-  Microsoft-Windows-Sysmon/Operational
+   Microsoft-Windows-Sysmon/Operational
 
 <section> <img src="/screenshots/windows log integration conf 1.png" height="370"> <br> <img src="/screenshots/windows log integration conf 2.png" height="370"> </section>
 
@@ -767,7 +767,7 @@ The Defender Operational log channel was identified via Event Viewer.
 Configured channel:
 
   
-  Microsoft-Windows-Windows Defender/Operational
+   Microsoft-Windows-Windows Defender/Operational
 
 High-value Defender event IDs added:
 - 1116 – Malware detected
@@ -829,7 +829,7 @@ Once connected, the system log directory was accessed.
 The SSH authentication log file was identified at:
 
   
-  /var/log/auth.log
+   /var/log/auth.log
 
 This file records:
 - failed SSH login attempts
@@ -843,7 +843,7 @@ After leaving the SSH service exposed for some time, automated brute-force attem
 To filter failed authentication attempts targeting the root account:
 
   
-  grep -i failed auth.log | grep -i root
+   grep -i failed auth.log | grep -i root
 
 <section> <img src="/screenshots/We can see logs of failed authentication.png" alt="SSH Failed Authentication Logs" height="370"> </section>
 
@@ -950,7 +950,7 @@ Fields added:
 To isolate brute-force behavior, the following filter was applied:
 
   
-  system.auth.ssh.event : failed
+   system.auth.ssh.event : failed
 
 <section> <img src="/screenshots/SSH failed activity on linux.png" alt="SSH Failed Authentication Activity" height="370"> </section>
 
@@ -966,7 +966,7 @@ The filtered query was saved for reuse in alerts and dashboards.
 Saved search name:
 
   
-  SSH Failed Activity
+   SSH Failed Activity
 
 This saved query acts as the base dataset for detection logic.
 
@@ -998,8 +998,8 @@ To visualize attacker origin, a map visualization was created.
 Filters used:
 
   
-  system.auth.ssh.event : failed  
-  AND agent.name : "linux-ssh-server"
+   system.auth.ssh.event : failed  
+   AND agent.name : "linux-ssh-server"
 
 <section> <img src="/screenshots/create map - 1 for ssh failed activity.png" alt="Create SSH Failed Map Step 1" height="370"> </section> <section> <img src="/screenshots/create map - 2 for ssh failed activity.png" alt="Create SSH Failed Map Step 2" height="370"> </section>
 
@@ -1016,7 +1016,7 @@ Join field | source.geo.country_iso_code
 The map was saved with the title:
 
   
-  ssh failed activity network map
+   ssh failed activity network map
 
 <section> <img src="/screenshots/save the map.png" alt="Save SSH Map" height="370"> </section>
 
@@ -1029,7 +1029,7 @@ A new dashboard was created to centralize SSH authentication activity.
 The dashboard was saved as:
 
   
-  authentication-activity
+   authentication-activity
 
 <section> <img src="/screenshots/save new dashboard.png" alt="Save Dashboard" height="370"> </section>
 
@@ -1040,7 +1040,7 @@ A second visualization was created to track successful SSH logins.
 Filter used:
 
   
-  system.auth.ssh.event : accepted
+   system.auth.ssh.event : accepted
 
 <section> <img src="/screenshots/baic dashboard created for ssh auth.png" alt="Successful SSH Dashboard" height="370"> </section>
 
@@ -1067,7 +1067,7 @@ Steps performed:
 - Applied the following filter to identify failed logon attempts:
 
   
-  event.code : 4625
+   event.code : 4625
 
 <section> <img src="/screenshots/RDP Failed Activity.png" alt="RDP Failed Authentication Logs" height="370"> </section>
 
@@ -1085,7 +1085,7 @@ The filtered query was saved for reuse.
 Saved search name:
 
   
-  RDP Failed Activity
+   RDP Failed Activity
 
 This saved search acts as the base dataset for all RDP brute-force detections.
 
@@ -1118,7 +1118,7 @@ After enabling the rule, alerts were verified in the Security module.
 Navigation:
 
   
-  Security → Alerts
+   Security → Alerts
 
 <section> <img src="/screenshots/Alert in stack management .png" height="370"> </section> <section> <img src="/screenshots/We will see alerts here.png" height="370"> </section>
 
@@ -1140,7 +1140,7 @@ Steps performed:
 Rule logic applied:
 
   
-  event.code : 4625 AND user.name : administrator
+   event.code : 4625 AND user.name : administrator
 
 Grouping fields:
 - source.ip
@@ -1177,7 +1177,7 @@ A geographic visualization was created to track failed RDP authentication attemp
 Filter used:
 
   
-  event.code : 4625 AND agent.name : <windows-server-name>
+   event.code : 4625 AND agent.name : <windows-server-name>
 
 A choropleth map layer was added.
 
@@ -1191,7 +1191,7 @@ Map configuration:
 The map was saved as:
 
   
-  RDP Failed Authentication
+   RDP Failed Authentication
 
 <section> <img src="/screenshots/Save map.png" alt="Save RDP Failed Map" width="650"> </section>
 
@@ -1202,8 +1202,8 @@ To visualize successful RDP logins, a second map was created.
 Filter used:
 
   
-  event.code : 4624 AND  
-  (winlog.event_data.logon_type : 10 OR winlog.event_data.logon_type : 7)
+   event.code : 4624 AND  
+   (winlog.event_data.logon_type : 10 OR winlog.event_data.logon_type : 7)
 
 Explanation:
 - Logon Type 10 → Remote Interactive (RDP)
@@ -1283,26 +1283,26 @@ This diagram serves as a blueprint for validating SOC visibility and detections.
 ### 13.2 Mapping Attack Steps to Telemetry
 
 Each stage of the attack was intentionally mapped to expected telemetry sources:
-
-  
-  RDP brute-force  
-  → Windows Event ID 4625 (failed logon)
-
-  
-  Successful RDP login  
-  → Windows Event ID 4624 (logon type 10)
-
-  
-  Command execution  
-  → Sysmon Event ID 1 (process creation)
-
-  
-  Network callbacks  
-  → Sysmon Event ID 3 (network connection)
-
-  
-  Defense evasion  
-  → Microsoft Defender Event ID 50001 🚨
+ 
+   
+   RDP brute-force  
+   → Windows Event ID 4625 (failed logon)
+ 
+   
+   Successful RDP login  
+   → Windows Event ID 4624 (logon type 10)
+ 
+   
+   Command execution  
+   → Sysmon Event ID 1 (process creation)
+ 
+   
+   Network callbacks  
+   → Sysmon Event ID 3 (network connection)
+ 
+   
+   Defense evasion  
+   → Microsoft Defender Event ID 50001 🚨
 
 This ensured that detections built earlier would be provably testable, not theoretical.
 
@@ -1357,8 +1357,8 @@ After deployment, the server was accessed via SSH and system packages were updat
 Commands executed:
 
   
-  apt-get update  
-  apt-get upgrade -y
+   apt-get update  
+   apt-get upgrade -y
 
 ### 14.3 Installing Required Dependencies
 
@@ -1377,7 +1377,7 @@ The official Mythic repository was cloned from GitHub.
 Command executed:
 
   
-  git clone https://github.com/its-a-feature/Mythic
+   git clone https://github.com/its-a-feature/Mythic
 
 <img src="/screenshots/clone github mythic repo.png" width="650">
 
@@ -1388,7 +1388,7 @@ Inside the Mythic directory, Docker support scripts were executed.
 Command executed:
 
   
-  ./install_docker_ubuntu.sh
+   ./install_docker_ubuntu.sh
 
 <img src="/screenshots/install docker for ubuntu.png" width="650">
 
@@ -1401,8 +1401,8 @@ The initial make command failed because the Docker daemon was not running.
 Fix applied:
 
   
-  systemctl restart docker  
-  systemctl status docker
+   systemctl restart docker  
+   systemctl status docker
 
 After restarting Docker, the build process succeeded.
 
@@ -1415,7 +1415,7 @@ Mythic services were started using the Mythic CLI.
 Command executed:
 
   
-  ./mythic-cli start
+   ./mythic-cli start
 
 <img src="/screenshots/Write command to run mythic cli.png" width="650">
 
@@ -1432,9 +1432,9 @@ Firewall rules were configured to restrict access to the Mythic server.
 Rules applied:
 - Block all inbound traffic by default
 - Allow access only from:
-  - analyst public IP
-  - Windows Server public IP
-  - Linux SSH server public IP
+   - analyst public IP
+   - Windows Server public IP
+   - Linux SSH server public IP
 
 <img src="/screenshots/create firewall for mythic.png" width="650"> <img src="/screenshots/my public ip address.png" width="650"> <img src="/screenshots/Mythic firewall conf.png" width="650"> <img src="/screenshots/Firewall updated.png" width="650">
 
@@ -1447,7 +1447,7 @@ The Mythic UI was accessed via HTTPS on port 7443.
 URL format:
 
   
-  https://<mythic-server-ip>:7443
+   https://<mythic-server-ip>:7443
 
 Default credentials were retrieved from the .env file.
 
@@ -1624,17 +1624,17 @@ A custom rule was created to detect Apollo agent execution.
 Navigation path:
 
   
-  Security → Rules → Create new rule → Custom query
+   Security → Rules → Create new rule → Custom query
 
 <section> <img src="/screenshots/open rules to create rules.png" width="720"> </section>
 
 Rule query used:
 
   
-  event.code : 1 AND (  
-    winlog.event_data.original_file_name : apollo.exe OR  
-    winlog.event_data.hashes : *  
-  )
+   event.code : 1 AND (  
+     winlog.event_data.original_file_name : apollo.exe OR  
+     winlog.event_data.hashes : *  
+   )
 
 Rule configuration screens:
 
@@ -1692,7 +1692,7 @@ Dashboard contents:
 Dashboard name:
 
   
-  mydfir - suspicious activity
+   mydfir - suspicious activity
 
 This dashboard provides centralized visibility into post-compromise behavior and C2-like activity 🔎.
 
@@ -1838,12 +1838,12 @@ Connector configuration:
 - URL:
 
   
-  http://<OS_TICKET_IP>/osticket/upload/api/tickets.xml
+   http://<OS_TICKET_IP>/osticket/upload/api/tickets.xml
 
 - Header:
 
   
-  X-API-Key: <OS_TICKET_API_KEY>
+   X-API-Key: <OS_TICKET_API_KEY>
 
 - Payload format: XML
 
@@ -1877,7 +1877,7 @@ A test alert generated a ticket inside OS Ticket.
 This validated the full pipeline:
 
   
-  Elastic Alert → Webhook Connector → OS Ticket Ticket
+   Elastic Alert → Webhook Connector → OS Ticket Ticket
 
 The ticket contained:
 - rule name
@@ -2001,7 +2001,7 @@ After confirming no further malicious activity, the ticket was closed.
 This completes the SOC workflow:
 
   
-  Detect → Alert → Ticket → Investigate → Document → Close
+   Detect → Alert → Ticket → Investigate → Document → Close
 
 
 
@@ -2022,14 +2022,14 @@ The SOC was validated using real attack activity and confirmed telemetry flow ac
 Validated lifecycle:
 
   
-  Endpoint Activity  
-  → Telemetry Collection  
-  → Detection Rule Trigger  
-  → Alert Generation  
-  → Ticket Creation  
-  → Analyst Investigation  
-  → Documentation  
-  → Ticket Closure
+   Endpoint Activity  
+   → Telemetry Collection  
+   → Detection Rule Trigger  
+   → Alert Generation  
+   → Ticket Creation  
+   → Analyst Investigation  
+   → Documentation  
+   → Ticket Closure
 
 Each stage was observed live during SSH brute-force, RDP brute-force, and Mythic C2 attack execution 🔁.
 
